@@ -18,16 +18,28 @@ app.get('/auth/google', function(req, res) {
 
   oauth2Client.getToken(code, function (err, tokens) {
     if(err) {
-      res.send(err);
-      //throw err;
-
-      return;
+      //res.send(err);
+      //return;
+      throw err;
     }
 
     // Now tokens contains an access_token and an optional refresh_token. Save them.
     oauth2Client.setCredentials(tokens);
 
-    res.send(tokens);
+    plus.people.get(
+      {
+        userId: 'me',
+        auth: oauth2Client
+      },
+      function (err, response) {
+        if(err) {
+          res.send(err);
+          return;
+        }
+
+        res.send(response);
+      }
+    );
   });
 });
 
