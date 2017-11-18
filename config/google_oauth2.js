@@ -13,9 +13,11 @@ const google = require('googleapis'),
 
         // If you only need one scope you can pass it as a string
         scope: 'https://www.googleapis.com/auth/plus.login'
-      });
+      }),
+      plus = google.plus('v1');
 
 module.exports = {
   url: url,
-  oauth2Client: oauth2Client
+  oauth2Client: oauth2Client,
+  plus: plus
 };

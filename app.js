@@ -7,7 +7,7 @@ const express = require('express'),
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-const {url, oauth2Client} = require('./config/google_oauth2');
+const {url, oauth2Client, plus} = require('./config/google_oauth2');
 
 app.get('/login', function(req, res) {
   res.redirect(url);
