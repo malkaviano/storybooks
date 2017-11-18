@@ -20,11 +20,10 @@ app.get('/auth/google', function(req, res) {
     if(err) throw err;
 
     // Now tokens contains an access_token and an optional refresh_token. Save them.
-    console.log(tokens);
     oauth2Client.setCredentials(tokens);
-  });
 
-  res.send(code);
+    res.send(tokens);
+  });
 });
 
 app.listen(port, () => {
