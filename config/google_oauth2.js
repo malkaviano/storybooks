@@ -12,7 +12,11 @@ const google = require('googleapis'),
         access_type: 'offline',
 
         // If you only need one scope you can pass it as a string
-        scope: 'https://www.googleapis.com/auth/plus.login'
+        scope: [ 
+          'https://www.googleapis.com/auth/plus.login',
+          'https://www.googleapis.com/auth/plus.me' 
+        ]
+        
       }),
       plus = google.plus('v1');
 
