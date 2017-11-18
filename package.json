@@ -1,0 +1,27 @@
+{
+  "name": "storybooks",
+  "version": "1.0.0",
+  "description": "App to share publications",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "googleapis": "^22.2.0",
+    "mongoose": "^4.13.3",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/malkaviano/storybooks.git"
+  },
+  "author": "Malkaviano",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/malkaviano/storybooks/issues"
+  },
+  "homepage": "https://github.com/malkaviano/storybooks#readme"
+}
