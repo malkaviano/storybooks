@@ -12,7 +12,7 @@ const google = require('googleapis'),
         access_type: 'offline',
 
         // If you only need one scope you can pass it as a string
-        scope: 'https://www.googleapis.com/auth/email'
+        scope: 'https://www.googleapis.com/auth/plus.login'
       });
 
 module.exports = {
