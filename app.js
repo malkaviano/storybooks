@@ -7,23 +7,24 @@ const express = require('express'),
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-const url = require('./config/google_oauth2');
+const {url, oauth2Client} = require('./config/google_oauth2');
 
 app.get('/login', function(req, res) {
   res.redirect(url);
 });
 
 app.get('/auth/google', function(req, res) {
-  const code = req.params.code;
+  const code = req.query.code;
+
+  oauth2Client.getToken(code, function (err, tokens) {
+    if(err) throw err;
+
+    // Now tokens contains an access_token and an optional refresh_token. Save them.
+    console.log(tokens);
+    oauth2Client.setCredentials(tokens);
+  });
 
   res.send(code);
-  
-  oauth2Client.getToken(code, function (err, tokens) {
-    // Now tokens contains an access_token and an optional refresh_token. Save them.
-    if (!err) {
-      oauth2Client.setCredentials(tokens);
-    }
-  });
 });
 
 app.listen(port, () => {

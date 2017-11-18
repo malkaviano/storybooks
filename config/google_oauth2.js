@@ -15,4 +15,7 @@ const google = require('googleapis'),
         scope: 'https://www.googleapis.com/auth/plus.login'
       });
 
-module.exports = url;
+module.exports = {
+  url: url,
+  oauth2Client: oauth2Client
+};
