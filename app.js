@@ -14,9 +14,16 @@ app.get('/login', function(req, res) {
 });
 
 app.get('/auth/google', function(req, res) {
-  console.log(req.params);
+  const code = req.params.code;
 
-  res.send('Loged');
+  res.send(code);
+  
+  oauth2Client.getToken(code, function (err, tokens) {
+    // Now tokens contains an access_token and an optional refresh_token. Save them.
+    if (!err) {
+      oauth2Client.setCredentials(tokens);
+    }
+  });
 });
 
 app.listen(port, () => {
