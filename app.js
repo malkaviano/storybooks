@@ -17,7 +17,12 @@ app.get('/auth/google', function(req, res) {
   const code = req.query.code;
 
   oauth2Client.getToken(code, function (err, tokens) {
-    if(err) throw err;
+    if(err) {
+      res.send(err);
+      //throw err;
+
+      return;
+    }
 
     // Now tokens contains an access_token and an optional refresh_token. Save them.
     oauth2Client.setCredentials(tokens);
