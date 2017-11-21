@@ -85,7 +85,7 @@ app.get('/auth/google', function(req, res) {
                           });
                         });
 
-        res.send(user);
+        res.send(`User: ${user}`);
       }
     );
   });
