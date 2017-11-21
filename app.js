@@ -70,22 +70,20 @@ app.get('/auth/google', function(req, res) {
             .then(user => {
               if(user) {
                 res.send(`User found: ${user}`);
-
-                return;
+              } else {
+                new User(
+                  {
+                    googleId: profile.id,
+                    name: profile.displayName,
+                    email: profile.emails[0].value,
+                    image: profile.image.url
+                  }
+                ).save()
+                .then(user => {
+                  res.send(`New User: ${user}`);
+                })
+                .catch(err => res.send(`DB Error: ${err}`));
               }
-
-              new User(
-                {
-                  googleId: profile.id,
-                  name: profile.displayName,
-                  email: profile.emails[0].value,
-                  image: profile.image.url
-                }
-              ).save()
-              .then(user => {
-                res.send(`New User: ${user}`);
-              })
-              .catch(err => res.send(`DB Error: ${err}`));
             })
             .catch(err => res.send(`DB Error: ${err}`));
       }
