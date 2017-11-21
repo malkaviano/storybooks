@@ -24,7 +24,7 @@ app.get('/auth/google', function(req, res) {
 
   oauth2Client.getToken(code, function (err, tokens) {
     if(err) {
-      res.send(err);
+      res.send(`Code error: ${err}`);
       return;
       //throw err;
     }
@@ -39,7 +39,7 @@ app.get('/auth/google', function(req, res) {
       },
       function (err, profile) {
         if(err) {
-          res.send(err);
+          res.send(`Plus error: ${err}`);
           return;
 
           //throw err;
