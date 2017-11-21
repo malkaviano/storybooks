@@ -84,7 +84,8 @@ app.get('/auth/google', function(req, res) {
               ).save()
               .then(user => {
                 res.send(`New User: ${user}`);
-              });
+              })
+              .catch(err => res.send(`DB Error: ${err}`));
             })
             .catch(err => res.send(`DB Error: ${err}`));
       }
