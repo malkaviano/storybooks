@@ -11,6 +11,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 const {url, oauth2Client, plus} = require('./config/google_oauth2');
 
+app.get('/', (req, res) => {
+  res.send('OK');
+});
+
 app.get('/login', function(req, res) {
   res.redirect(url);
 });
@@ -20,7 +24,9 @@ app.get('/auth/google', function(req, res) {
 
   oauth2Client.getToken(code, function (err, tokens) {
     if(err) {
-      throw err;
+      res.send(err);
+      return;
+      //throw err;
     }
 
     // Now tokens contains an access_token and an optional refresh_token. Save them.

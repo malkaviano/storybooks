@@ -5,7 +5,7 @@ const google = require('googleapis'),
       oauth_string = require('./client_secret.json'),
       CLIENT_ID = oauth_string.id,
       CLIENT_SECRET = process.env.SECRET,
-      REDIRECT_URL = oauth_string.redirect_url,
+      REDIRECT_URL = process.env.REDIRECT || "http://localhost:3000/auth/google",
       oauth2Client = new OAuth2Client(CLIENT_ID, CLIENT_SECRET, REDIRECT_URL),
       url = oauth2Client.generateAuthUrl({
         // 'online' (default) or 'offline' (gets refresh_token)
