@@ -70,6 +70,8 @@ app.get('/auth/google', function(req, res) {
             .then(user => {
               if(user) {
                 res.send(`User found: ${user}`);
+
+                return;
               }
 
               new User(
