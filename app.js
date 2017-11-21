@@ -3,6 +3,8 @@
 const express = require('express'),
       path = require('path'),
       app = express(),
+      mongoose = require('mongoose'),
+      User = require('./models/user')(mongoose),
       port = process.env.PORT || 3000;
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -18,9 +20,7 @@ app.get('/auth/google', function(req, res) {
 
   oauth2Client.getToken(code, function (err, tokens) {
     if(err) {
-      res.send(err);
-      return;
-      //throw err;
+      throw err;
     }
 
     // Now tokens contains an access_token and an optional refresh_token. Save them.
@@ -31,7 +31,7 @@ app.get('/auth/google', function(req, res) {
         userId: 'me',
         auth: oauth2Client
       },
-      function (err, response) {
+      function (err, profile) {
         if(err) {
           res.send(err);
           return;
@@ -60,7 +60,26 @@ app.get('/auth/google', function(req, res) {
         }
         */
         
-        res.send(response);
+        let user = User.findOne({ googleId: profile.googleId })
+                        .then((user) => {
+                          if(user) {
+                            return user;
+                          }
+
+                          new User(
+                            {
+                              googleId: profile.id,
+                              name: profile.displayName,
+                              email: profile.emails[0].value,
+                              image: profile.image.url
+                            }
+                          ).save()
+                          .then(user => {
+                            return user;
+                          });
+                        });
+
+        res.send(user);
       }
     );
   });
