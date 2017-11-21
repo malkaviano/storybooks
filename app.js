@@ -85,7 +85,7 @@ app.get('/auth/google', function(req, res) {
                 })
                 .catch(err => res.send(`DB Error: ${err}`));
                 */
-                res.send(user);
+                res.send(`User: ${user}`);
               }
             })
             .catch(err => res.send(`DB Error: ${err}`));
