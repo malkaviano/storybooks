@@ -35,8 +35,31 @@ app.get('/auth/google', function(req, res) {
         if(err) {
           res.send(err);
           return;
+
+          //throw err;
         }
 
+        /*
+        {
+          "kind":"plus#person",
+          "etag":"\"ucaTEV-ZanNH5M3SCxYRM0QRw2Y/ngrNt0K7A7t998awTosHkyzS48Q\"",
+          "emails":[{"value":"rafael.kss@gmail.com","type":"account"}],
+          "objectType":"person",
+          "id":"116278152755049152404",
+          "displayName":"Rafael Silva",
+          "name":{"familyName":"Silva","givenName":"Rafael"},
+          "image":
+          {
+            "url":"https://lh5.googleusercontent.com/-3-onQGpE9mk/AAAAAAAAAAI/AAAAAAAAAPI/qTsIzbggZMk/photo.jpg?sz=50",
+            "isDefault":false
+          },
+          "isPlusUser":false,
+          "language":"pt_BR",
+          "ageRange":{"min":21},
+          "verified":false
+        }
+        */
+        
         res.send(response);
       }
     );
