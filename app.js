@@ -71,6 +71,7 @@ app.get('/auth/google', function(req, res) {
               if(user) {
                 res.send(`User found: ${user}`);
               } else {
+                /*
                 new User(
                   {
                     googleId: profile.id,
@@ -83,6 +84,8 @@ app.get('/auth/google', function(req, res) {
                   res.send(`New User: ${user}`);
                 })
                 .catch(err => res.send(`DB Error: ${err}`));
+                */
+                res.send(user);
               }
             })
             .catch(err => res.send(`DB Error: ${err}`));
