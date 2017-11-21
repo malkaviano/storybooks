@@ -66,26 +66,24 @@ app.get('/auth/google', function(req, res) {
         }
         */
         
-        let user = User.findOne({ googleId: profile.googleId })
-                        .then((user) => {
-                          if(user) {
-                            return user;
-                          }
+        User.findOne({ googleId: profile.googleId })
+            .then((user) => {
+              if(user) {
+                res.send(`User found: ${user}`);
+              }
 
-                          new User(
-                            {
-                              googleId: profile.id,
-                              name: profile.displayName,
-                              email: profile.emails[0].value,
-                              image: profile.image.url
-                            }
-                          ).save()
-                          .then(user => {
-                            return user;
-                          });
-                        });
-
-        res.send(`User: ${user}`);
+              new User(
+                {
+                  googleId: profile.id,
+                  name: profile.displayName,
+                  email: profile.emails[0].value,
+                  image: profile.image.url
+                }
+              ).save()
+              .then(user => {
+                res.send(`New User: ${user}`);
+              });
+            });
       }
     );
   });
