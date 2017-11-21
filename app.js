@@ -67,7 +67,7 @@ app.get('/auth/google', function(req, res) {
         */
         
         User.findOne({ googleId: profile.googleId })
-            .then((user) => {
+            .then(user => {
               if(user) {
                 res.send(`User found: ${user}`);
               }
@@ -83,7 +83,8 @@ app.get('/auth/google', function(req, res) {
               .then(user => {
                 res.send(`New User: ${user}`);
               });
-            });
+            })
+            .catch(err => res.send(`DB Error: ${err}`));
       }
     );
   });
