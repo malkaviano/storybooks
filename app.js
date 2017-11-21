@@ -66,7 +66,7 @@ app.get('/auth/google', function(req, res) {
         }
         */
         
-        User.findOne({ googleId: profile.googleId })
+        User.findOne({ googleId: profile.id })
             .then(user => {
               if(user) {
                 res.send(`User found: ${user}`);
