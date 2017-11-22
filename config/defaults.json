@@ -1,3 +1,18 @@
 {
-  "loginUrl": "/auth/login"
+  "loginUrl": "/auth/login",
+  "loginRedirect": "/",
+  "logoutRedirect": "/",
+  "clientId": "715943817959-llcvj77rjril6nuacpl62g9a92nlchu8.apps.googleusercontent.com",
+  "scopes": [ 
+    "https://www.googleapis.com/auth/plus.login",
+    "https://www.googleapis.com/auth/plus.me",
+    // Deprecated, but needed. Google is full of shit.
+    "https://www.googleapis.com/auth/userinfo.email",
+    "https://www.googleapis.com/auth/userinfo.profile"
+  ],
+  "plusVersion": "v1",
+  "plusUserId": "me",
+  "sessionResave": false,
+  "sessionSaveUninitialized": false
+
 }

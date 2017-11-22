@@ -1,6 +1,7 @@
 'use strict';
 
-const {url, oauth2Client, plus} = require('../config/google_oauth2');
+const {url, oauth2Client, plus} = require('../config/google_oauth2'),
+      defaults = require('../config/defaults.json');
 
 module.exports = function(router, User) {
   router.get('/login', function(req, res) {
@@ -14,7 +15,7 @@ module.exports = function(router, User) {
 
         throw err;
       } else {
-        res.redirect('/');
+        res.redirect(defaults.logoutRedirect);
       }
     });
   });
@@ -32,7 +33,7 @@ module.exports = function(router, User) {
 
       plus.people.get(
         {
-          userId: 'me',
+          userId: defaults.plusUserId,
           auth: oauth2Client
         },
         function (err, profile) {
@@ -75,16 +76,24 @@ module.exports = function(router, User) {
                   .then(newUser => {
                     user = newUser;
                   })
-                  .catch(err => res.send(`DB Error: ${err}`));
+                  .catch(err => {
+                    console.log(`DB Error: ${err}`);
+
+                    throw err;
+                  });
                 }
 
                 req.session.userId = user.googleId;
                 req.session.username = user.name;
                 req.session.email = user.email;
                 
-                res.redirect(req.session.requestedUrl || '/');
+                res.redirect(req.session.requestedUrl || defaults.loginRedirect);
               })
-              .catch(err => res.send(`DB Error: ${err}`));
+              .catch(err => {
+                console.log(`DB Error: ${err}`);
+
+                throw err;
+              });
         }
       );
     });

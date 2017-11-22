@@ -1,5 +1,7 @@
 'use strict';
 
+const defaults = require('./defaults.json');
+
 module.exports = function(app, connection) {
   const session = require('express-session'),
         MongoStore = require('connect-mongo')(session),
@@ -8,9 +10,9 @@ module.exports = function(app, connection) {
   store.clear(result => console.log(result));
 
   app.use(session({
-    secret: process.env.SESSION || 'xpto_secret',
-    resave: false,
-    saveUninitialized: false,
+    secret: process.env.SESSION,
+    resave: defaults.sessionResave,
+    saveUninitialized: defaults.sessionSaveUninitialized,
     store: store
   }));
 

@@ -2,25 +2,19 @@
 
 const google = require('googleapis'),
       OAuth2Client = google.auth.OAuth2,
-      CLIENT_ID = '715943817959-llcvj77rjril6nuacpl62g9a92nlchu8.apps.googleusercontent.com',
+      defaults = require('./defaults.json'),
+      CLIENT_ID = defaults.clientId,
       CLIENT_SECRET = process.env.SECRET,
-      REDIRECT_URL = process.env.REDIRECT || "http://localhost:3000/auth/google",
+      REDIRECT_URL = process.env.REDIRECT,
       oauth2Client = new OAuth2Client(CLIENT_ID, CLIENT_SECRET, REDIRECT_URL),
       url = oauth2Client.generateAuthUrl({
         // 'online' (default) or 'offline' (gets refresh_token)
         //access_type: 'offline',
 
         // If you only need one scope you can pass it as a string
-        scope: [ 
-          'https://www.googleapis.com/auth/plus.login',
-          'https://www.googleapis.com/auth/plus.me',
-          // Deprecated, but needed. Google is full of shit.
-          'https://www.googleapis.com/auth/userinfo.email',
-          'https://www.googleapis.com/auth/userinfo.profile'
-        ]
-        
+        scope: defaults.scopes
       }),
-      plus = google.plus('v1');
+      plus = google.plus(defaults.plusVersion);
 
 module.exports = {
   url: url,
