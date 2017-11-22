@@ -81,8 +81,8 @@ module.exports = function(router, User) {
                 req.session.userId = user.googleId;
                 req.session.username = user.name;
                 req.session.email = user.email;
-             
-                res.redirect('/');
+                
+                res.redirect(req.session.requestedUrl || '/');
               })
               .catch(err => res.send(`DB Error: ${err}`));
         }
