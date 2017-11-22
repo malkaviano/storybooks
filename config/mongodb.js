@@ -1,12 +1,11 @@
 'use strict';
 
-const mongoose = require('mongoose'),
-      db = require('./config/database');
+const mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
 
 mongoose.connect(
-  db.mongoURI,
+  process.env.MONGO_URI,
   { 
     useMongoClient: true
   }
