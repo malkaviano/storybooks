@@ -5,8 +5,14 @@ module.exports = function(router) {
     res.render('stories/index');
   });
 
-  router.get('/add', (req, res) => {
-    res.render('stories/add');
+  router.post('/', (req, res) => {
+    req.body.allowComments = !!req.body.allowComments;
+
+    res.send(req.body);
+  });
+
+  router.get('/new', (req, res) => {
+    res.render('stories/new');
   });
 
   return router;
