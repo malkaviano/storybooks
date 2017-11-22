@@ -5,7 +5,11 @@ module.exports = {
     if (req.session.username) {
       return next();
     } else {
-      res.redirect('/auth/login'); 
+      console.log(req.baseUrl);
+      
+      req.session.requested_url = req.baseUrl;
+
+      res.redirect(`/auth/login`); 
     }       
   },
   ensureAuthorized: function(obj, success, failure) {
