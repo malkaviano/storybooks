@@ -10,9 +10,7 @@ module.exports = function(router, User) {
 
     oauth2Client.getToken(code, function (err, tokens) {
       if(err) {
-        res.send(`Code error: ${err}`);
-        return;
-        //throw err;
+        throw err;
       }
 
       // Now tokens contains an access_token and an optional refresh_token. Save them.
@@ -25,10 +23,7 @@ module.exports = function(router, User) {
         },
         function (err, profile) {
           if(err) {
-            res.send(`Plus error: ${err}`);
-            return;
-
-            //throw err;
+            throw err;
           }
 
           /*

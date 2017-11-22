@@ -16,6 +16,7 @@ app.use(session({
   secret: process.env.SESSION || 'xpto_secret',
   resave: true,
   saveUninitialized: true,
+  cookie: { secure: true },
   store: new MongoStore({ mongooseConnection: mongoose.connection })
 }));
 
