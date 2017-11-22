@@ -9,15 +9,16 @@ module.exports = function(router, Story) {
     req.body.allowComments = !!req.body.allowComments;
     req.body.author = req.session.userId;
 
-    new Story(req.body).save()
-                        .then(story => {
-                          console.log(story);
-                        })
-                        .catch(err => {
-                          console.log(err);
+    new Story(req.body)
+      .save()
+      .then(story => {
+        console.log(story);
+      })
+      .catch(err => {
+        console.log(err);
 
-                          throw err;
-                        });
+        throw err;
+      });
 
     res.send(req.body);
   });

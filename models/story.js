@@ -1,8 +1,9 @@
 'use strict';
 
 module.exports = function(mongoose) {
-  
-  mongoose.model('story', new mongoose.Schema({
+  const Schema = mongoose.Schema;
+
+  mongoose.model('story', new Schema({
     title: {
       type: String,
       required: true
