@@ -3,7 +3,7 @@
 const express = require('express'),
       path = require('path'),
       app = express(),
-      mongoose = require('./mongodb'),
+      mongoose = require('./config/mongodb'),
       User = require('./models/user')(mongoose),
       session = require('./config/session')(app, mongoose.connection),
       port = process.env.PORT || 3000,
