@@ -85,7 +85,7 @@ module.exports = function(router, User) {
                   });
                 }
 
-                req.session.userId = user.googleId;
+                req.session.userId = user._id;
                 req.session.username = user.name;
                 req.session.email = user.email;
                 
