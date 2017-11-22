@@ -11,12 +11,10 @@ const express = require('express'),
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', (req, res) => {
-  res.send(req.session.username);
-});
+const indexRouter = require('./routes/index')(express.Router());
+      authRouter = require('./routes/auth')(express.Router(), User);
 
-const authRouter = require('./routes/auth')(express.Router(), User);
-
+app.use('/', indexRouter);
 app.use('/auth', authRouter);
 
 app.listen(port, () => {
