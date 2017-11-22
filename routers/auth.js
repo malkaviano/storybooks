@@ -1,8 +1,22 @@
+'use strict';
+
 const {url, oauth2Client, plus} = require('../config/google_oauth2');
 
 module.exports = function(router, User) {
   router.get('/login', function(req, res) {
     res.redirect(url);
+  });
+
+  router.get('/logout', function(req, res) {
+    req.session.destroy(function(err) {
+      if(err) {
+        console.log(err);
+
+        throw err;
+      } else {
+        res.redirect('/');
+      }
+    });
   });
 
   router.get('/google', function(req, res) {
