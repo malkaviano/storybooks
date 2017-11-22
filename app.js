@@ -29,10 +29,6 @@ app.get('/', (req, res) => {
   res.send(req.session.username);
 });
 
-app.get('/login', function(req, res) {
-  res.redirect(url);
-});
-
 const authRouter = require('./routers/auth')(express.Router(), User);
 
 app.use('/auth', authRouter);
