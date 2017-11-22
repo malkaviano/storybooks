@@ -15,7 +15,7 @@ app.get('/', (req, res) => {
   res.send(req.session.username);
 });
 
-const authRouter = require('./routers/auth')(express.Router(), User);
+const authRouter = require('./routes/auth')(express.Router(), User);
 
 app.use('/auth', authRouter);
 
