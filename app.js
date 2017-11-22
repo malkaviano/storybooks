@@ -6,6 +6,7 @@ const express = require('express'),
       parser = require('body-parser'),
       mongoose = require('./config/mongodb'),
       User = require('./models/user')(mongoose),
+      Story = require('./models/story')(mongoose),
       session = require('./config/session')(app, mongoose.connection),
       port = process.env.PORT || 3000;
 
@@ -16,7 +17,7 @@ app.use(parser.json());
 
 const indexRouter = require('./routes/index')(express.Router()),
       authRouter = require('./routes/auth')(express.Router(), User),
-      storiesRouter = require('./routes/stories')(express.Router());
+      storiesRouter = require('./routes/stories')(express.Router(), Story);
 
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
