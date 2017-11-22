@@ -31,12 +31,14 @@ module.exports = function(mongoose) {
       },
       commentUser: {
         type: Schema.Types.ObjectId,
-        ref: 'user'
+        ref: 'user',
+        required: true
       }
     }],
     author: {
       type: Schema.Types.ObjectId,
-      ref: 'user'
+      ref: 'user',
+      required: true
     },
     date: {
       type: Date,
