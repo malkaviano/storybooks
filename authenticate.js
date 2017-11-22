@@ -6,7 +6,9 @@ module.exports = {
       return next();
     } else {
       console.log(req.baseUrl);
-      
+
+      console.log(req.originalUrl);
+
       req.session.requested_url = req.baseUrl;
 
       res.redirect(`/auth/login`); 
