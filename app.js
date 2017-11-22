@@ -26,11 +26,7 @@ app.use(function(req,res,next){
 });
 
 app.get('/', (req, res) => {
-  if(!req.session.username) {
-    res.redirect('/login');
-  } else {
-    res.send(req.session.username);
-  }
+  res.send(req.session.username);
 });
 
 app.get('/login', function(req, res) {
