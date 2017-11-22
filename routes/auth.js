@@ -38,6 +38,8 @@ module.exports = function(router, User) {
         },
         function (err, profile) {
           if(err) {
+            console.log(err);
+
             throw err;
           }
 
