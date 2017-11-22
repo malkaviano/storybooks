@@ -5,7 +5,7 @@ module.exports = {
     if (req.session.username) {
       return next();
     } else {
-      res.redirect('/login'); 
+      res.redirect('/auth/login'); 
     }       
   },
   ensureAuthorized: function(obj, success, failure) {
