@@ -10,6 +10,6 @@ mongoose.connect(
   { 
     useMongoClient: true
   }
-).then((db) => console.log(`MongoDB connected to ${db.mongoURI}`));
+).then((db) => console.log(`MongoDB connected`));
 
 module.exports = mongoose;

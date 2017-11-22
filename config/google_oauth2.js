@@ -2,8 +2,7 @@
 
 const google = require('googleapis'),
       OAuth2Client = google.auth.OAuth2,
-      oauth_string = require('./client_secret.json'),
-      CLIENT_ID = oauth_string.id,
+      CLIENT_ID = '715943817959-llcvj77rjril6nuacpl62g9a92nlchu8.apps.googleusercontent.com',
       CLIENT_SECRET = process.env.SECRET,
       REDIRECT_URL = process.env.REDIRECT || "http://localhost:3000/auth/google",
       oauth2Client = new OAuth2Client(CLIENT_ID, CLIENT_SECRET, REDIRECT_URL),
