@@ -64,11 +64,11 @@ module.exports = function(router, User) {
                   })
                   .catch(err => res.send(`DB Error: ${err}`));
                 }
-
+/*
                 req.session.userId = user.googleId;
                 req.session.username = user.name;
                 req.session.email = user.email;
-                
+*/              
                 res.redirect('/');
               })
               .catch(err => res.send(`DB Error: ${err}`));
