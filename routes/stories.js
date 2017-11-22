@@ -1,11 +1,13 @@
 'use strict';
 
+const {ensureAuthenticated, ensureAuthorized} = require('../authenticate');
+
 module.exports = function(router, Story) {
   router.get('/', (req, res) => {
     res.render('stories/index');
   });
 
-  router.post('/', (req, res) => {
+  router.post('/', ensureAuthenticated, (req, res) => {
     req.body.allowComments = !!req.body.allowComments;
     req.body.author = req.session.userId;
 
@@ -13,6 +15,8 @@ module.exports = function(router, Story) {
       .save()
       .then(story => {
         console.log(story);
+
+        redirect('/stories');
       })
       .catch(err => {
         console.log(err);
@@ -23,7 +27,7 @@ module.exports = function(router, Story) {
     res.send(req.body);
   });
 
-  router.get('/new', (req, res) => {
+  router.get('/new', ensureAuthenticated, (req, res) => {
     res.render('stories/new');
   });
 
