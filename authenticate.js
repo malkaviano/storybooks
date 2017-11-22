@@ -5,7 +5,7 @@ module.exports = {
     if (req.session.username) {
       return next();
     } else {
-      req.session.requested_url = req.originalUrl;
+      req.session.requestedUrl = req.originalUrl;
 
       res.redirect(`/auth/login`); 
     }       
