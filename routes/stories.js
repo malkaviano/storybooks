@@ -5,5 +5,9 @@ module.exports = function(router) {
     res.render('stories/index');
   });
 
+  router.get('/add', (req, res) => {
+    res.render('stories/add');
+  });
+
   return router;
 };
