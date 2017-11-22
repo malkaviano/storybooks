@@ -8,15 +8,18 @@ const express = require('express'),
       MongoStore = require('connect-mongo')(session),
       User = require('./models/user')(mongoose),
       port = process.env.PORT || 3000,
-      {ensureAuthenticated, ensureAuthorized} = require('./authenticate');
+      {ensureAuthenticated, ensureAuthorized} = require('./authenticate'),
+      store = new MongoStore({ mongooseConnection: mongoose.connection });
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+store.clear(result => console.log(result));
+
 app.use(session({
   secret: process.env.SESSION || 'xpto_secret',
-  resave: true,
-  saveUninitialized: true,
-  store: new MongoStore({ mongooseConnection: mongoose.connection })
+  resave: false,
+  saveUninitialized: false,
+  store: store
 }));
 
 app.use(function(req,res,next){
