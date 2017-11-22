@@ -11,7 +11,7 @@ const express = require('express'),
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-const indexRouter = require('./routes/index')(express.Router());
+const indexRouter = require('./routes/index')(express.Router()),
       authRouter = require('./routes/auth')(express.Router(), User);
 
 app.use('/', indexRouter);
