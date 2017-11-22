@@ -2,7 +2,7 @@
 
 module.exports = function(router) {
   router.get('/', (req, res) => {
-    res.send(req.session.username);
+    res.render('index/welcome');
   });
 
   return router;
