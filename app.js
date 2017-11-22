@@ -17,7 +17,7 @@ const indexRouter = require('./routes/index')(express.Router()),
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
 
-require('./config/handlebars');
+require('./config/handlebars')(app);
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
