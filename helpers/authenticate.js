@@ -1,6 +1,6 @@
 'use strict';
 
-const defaults = require('./config/defaults.json');
+const defaults = require('../config/defaults.json');
 
 module.exports = {
   ensureAuthenticated: function(req, res, next) {

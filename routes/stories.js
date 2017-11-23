@@ -1,6 +1,6 @@
 'use strict';
 
-const {ensureAuthenticated, ensureAuthorized} = require('../authenticate');
+const {ensureAuthenticated, ensureAuthorized} = require('../helpers/authenticate');
 
 module.exports = function(router, Story) {
   router.get('/', (req, res) => {
