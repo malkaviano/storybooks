@@ -46,10 +46,10 @@ module.exports = function(router, Story) {
 
     Story.findOne({ _id: id, status: "public" })
           .populate('author')
-          .then(stories => {
+          .then(story => {
             res.render(
               'stories/show', {
-              stories: stories
+              story: story
             });
           })
           .catch(err => {
