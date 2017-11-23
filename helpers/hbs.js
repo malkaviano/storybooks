@@ -1,6 +1,7 @@
 'use strict';
 
-const striptags = require('striptags');
+const striptags = require('striptags'),
+      moment = require('moment');
 
 module.exports = {
   truncate: function(str, len) {
@@ -16,5 +17,6 @@ module.exports = {
 
     return newStr;
   },
-  striptags: striptags
+  striptags: striptags,
+  formatDate: (date, format) => moment(date).format(format)
 };

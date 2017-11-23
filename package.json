@@ -10,6 +10,7 @@
     "express-handlebars": "^3.0.0",
     "express-session": "^1.15.6",
     "googleapis": "^22.2.0",
+    "moment": "^2.19.2",
     "mongoose": "^4.13.4",
     "path": "^0.12.7",
     "striptags": "^3.1.0"
