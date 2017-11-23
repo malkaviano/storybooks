@@ -8,12 +8,15 @@ const express = require('express'),
       User = require('./models/user')(mongoose),
       Story = require('./models/story')(mongoose),
       session = require('./config/session')(app, mongoose.connection),
+      methodOverride = require('method-override'),
       port = process.env.PORT || 3000;
 
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(parser.urlencoded({ extended: false }));
 app.use(parser.json());
+
+app.use(methodOverride('_method'));
 
 const indexRouter = require('./routes/index')(express.Router(), Story),
       authRouter = require('./routes/auth')(express.Router(), User),

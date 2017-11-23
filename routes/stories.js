@@ -61,5 +61,21 @@ module.exports = function(router, Story) {
           });
   });
 
+  router.delete('/:id', (req, res) => {
+    const id = req.params.id;
+
+    Story.remove({ _id: req.params.id })
+    .then(() => {
+      //res.flash('info_msg', 'Idea was deleted!');
+
+      res.redirect('/dashboard')
+    })
+    .catch(err => {
+      console.log(err);
+      
+      throw err;
+    });          
+  });
+
   return router;
 };

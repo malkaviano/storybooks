@@ -19,7 +19,7 @@
       <td>
         <a href="/stories/edit/{{_id}}" class="btn left-align"><i class="fa fa-pencil"></i> Edit</a>
 
-        <form action="/stories/{{_id}}" method="post" id="delete-form">
+        <form action="/stories/{{_id}}?_method=DELETE" method="post" id="delete-form">
           <button class="btn red" type="submit"><i class="fa fa-remove"></i> Delete</button>
         </form>
       </td>
@@ -28,5 +28,5 @@
   </tbody>
 </table>
 {{else}}
-
+  <h5>You have no Stories yet</h5>
 {{/if}}
