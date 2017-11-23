@@ -5,6 +5,7 @@ const {ensureAuthenticated, ensureAuthorized} = require('../authenticate');
 module.exports = function(router, Story) {
   router.get('/', (req, res) => {
     Story.find({ status: "public" })
+          .populate('user')
           .then(stories => {
             res.render(
               'stories/index', {
