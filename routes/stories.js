@@ -9,8 +9,8 @@ module.exports = function(router, Story) {
           .then(stories => {
             res.render(
               'stories/index', {
-                stories: stories
-              });
+              stories: stories
+            });
           })
           .catch(err => {
             console.log(err);
@@ -35,6 +35,24 @@ module.exports = function(router, Story) {
 
         throw err;
       });
+  });
+
+  router.get('/:id', (req, res) => {
+    const id = req.params.id;
+
+    Story.find({ _id: id, status: "public" })
+          .populate('author')
+          .then(stories => {
+            res.render(
+              'stories/show', {
+              stories: stories
+            });
+          })
+          .catch(err => {
+            console.log(err);
+            
+            throw err;
+          });
   });
 
   router.get('/new', ensureAuthenticated, (req, res) => {
