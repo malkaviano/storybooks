@@ -5,12 +5,17 @@ const {ensureAuthenticated, ensureAuthorized} = require('../authenticate');
 module.exports = function(router, Story) {
   router.get('/', (req, res) => {
     Story.find({ status: "public" })
-          .populate('user')
+          .populate('author')
           .then(stories => {
             res.render(
               'stories/index', {
                 stories: stories
               });
+          })
+          .catch(err => {
+            console.log(err);
+            
+            throw err;
           });
   });
 
