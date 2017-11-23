@@ -44,9 +44,8 @@ module.exports = function(router, Story) {
   });
 
   router.get('/:id', (req, res) => {
-    const id = req.params.id;
 
-    Story.findOne({ _id: id, status: "public" })
+    Story.findOne({ _id: req.params.id, status: "public" })
           .populate('author')
           .then(story => {
             res.render(
@@ -62,7 +61,6 @@ module.exports = function(router, Story) {
   });
 
   router.delete('/:id', (req, res) => {
-    const id = req.params.id;
 
     Story.remove({ _id: req.params.id })
     .then(() => {
