@@ -8,9 +8,11 @@ module.exports = function(router, Story) {
           .populate('author')
           .then(stories => {
             res.render(
-              'stories/index', {
-              stories: stories
-            });
+              'stories/index',
+              {
+                stories: stories
+              }
+            );
           })
           .catch(err => {
             console.log(err);

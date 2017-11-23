@@ -17,5 +17,9 @@ footer {
 }
 
 .story-text {
-  height: 105px;
+  height: 110px;
+}
+
+.dash-status {
+  text-transform: capitalize;
 }

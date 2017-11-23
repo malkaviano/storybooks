@@ -15,7 +15,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(parser.urlencoded({ extended: false }));
 app.use(parser.json());
 
-const indexRouter = require('./routes/index')(express.Router()),
+const indexRouter = require('./routes/index')(express.Router(), Story),
       authRouter = require('./routes/auth')(express.Router(), User),
       storiesRouter = require('./routes/stories')(express.Router(), Story);
 

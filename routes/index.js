@@ -2,13 +2,26 @@
 
 const {ensureAuthenticated, ensureAuthorized} = require('../helpers/authenticate');
 
-module.exports = function(router) {
+module.exports = function(router, Story) {
   router.get('/', (req, res) => {
     res.render('index/welcome');
   });
 
   router.get('/dashboard', ensureAuthenticated, (req, res) => {
-    res.render('index/dashboard');
+    Story.find({ author: req.session.userId })
+          .then(stories => {
+            res.render(
+              'index/dashboard',
+              { 
+                stories: stories 
+              }
+            );
+          })
+          .catch(err => {
+            console.log(err);
+
+            throw err;
+          });
   });
 
   router.get('/about', (req, res) => {
