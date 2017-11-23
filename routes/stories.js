@@ -55,7 +55,7 @@ module.exports = function(router, Story) {
           });
   });
 
-  router.get('/new', ensureAuthenticated, (req, res) => {
+  router.get('/new', /*ensureAuthenticated,*/ (req, res) => {
     res.render('stories/new');
   });
 
