@@ -28,7 +28,7 @@ module.exports = function(router, Story) {
       .then(story => {
         console.log(story);
 
-        redirect('/stories');
+        res.redirect('/stories');
       })
       .catch(err => {
         console.log(err);
