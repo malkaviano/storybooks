@@ -35,8 +35,6 @@ module.exports = function(router, Story) {
 
         throw err;
       });
-
-    res.send(req.body);
   });
 
   router.get('/new', ensureAuthenticated, (req, res) => {
