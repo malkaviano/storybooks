@@ -4,7 +4,13 @@ const {ensureAuthenticated, ensureAuthorized} = require('../authenticate');
 
 module.exports = function(router, Story) {
   router.get('/', (req, res) => {
-    res.render('stories/index');
+    Story.find({ status: "public" })
+          .then(stories => {
+            res.render(
+              'stories/index', {
+                stories: stories
+              });
+          });
   });
 
   router.post('/', ensureAuthenticated, (req, res) => {
