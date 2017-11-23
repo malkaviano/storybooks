@@ -9,7 +9,7 @@ module.exports = function(app) {
     exphbs({
       helpers: {
         truncate: truncate,
-        stripTags: stripTags
+        stripTags: striptags
       },
       defaultLayout: 'main' 
     })

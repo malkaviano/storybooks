@@ -11,7 +11,8 @@
     "express-session": "^1.15.6",
     "googleapis": "^22.2.0",
     "mongoose": "^4.13.4",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "striptags": "^3.1.0"
   },
   "scripts": {
     "start": "node app.js",

@@ -1,5 +1,7 @@
 'use strict';
 
+const striptags = require('striptags');
+
 module.exports = {
   truncate: function(str, len) {
     let newStr = "" + str;
@@ -14,7 +16,5 @@ module.exports = {
 
     return newStr;
   },
-  stripTags: {
-    
-  }
+  striptags: striptags
 };
