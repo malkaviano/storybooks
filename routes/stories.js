@@ -37,6 +37,10 @@ module.exports = function(router, Story) {
       });
   });
 
+  router.get('/new', ensureAuthenticated, (req, res) => {
+    res.render('stories/new');
+  });
+
   router.get('/:id', (req, res) => {
     const id = req.params.id;
 
@@ -53,10 +57,6 @@ module.exports = function(router, Story) {
             
             throw err;
           });
-  });
-
-  router.get('/new', /*ensureAuthenticated,*/ (req, res) => {
-    res.render('stories/new');
   });
 
   return router;
