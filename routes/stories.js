@@ -1,6 +1,7 @@
 'use strict';
 
-const {ensureAuthenticated, ensureAuthorized} = require('../helpers/authenticate');
+const {ensureAuthenticated, ensureAuthorized} = require('../helpers/authenticate'),
+      utils = require('../helpers/utils');
 
 module.exports = function(router, Story) {
   router.get('/', (req, res) => {
@@ -15,11 +16,7 @@ module.exports = function(router, Story) {
             );
           })
           .catch(err => {
-            console.log(err);
-            
-            res.flash('info_msg', 'Database error occurred');
-            
-            res.redirect('/');
+            utils.error(res, err);
           });
   });
 
@@ -72,11 +69,7 @@ module.exports = function(router, Story) {
             }
           })
           .catch(err => {
-            console.log(err);
-            
-            res.flash('error_msg', "Invalid Story");
-            
-            res.redirect('/stories');
+            utils.error(res, err);
           });
   });
 
@@ -85,15 +78,21 @@ module.exports = function(router, Story) {
     Story.findOne({ _id: req.params.id, author: req.session.userId })
           .populate('author')
           .then(story => {
-            res.render(
-              'stories/edit', {
-              story: story
-            });
+            if(story) {
+              res.render(
+                'stories/edit',
+                {
+                  story: story
+                }
+              );
+            } else {
+              res.flash('error_msg', "Story not found");
+              
+              res.redirect('/dashboard');
+            }
           })
           .catch(err => {
-            console.log(err);
-            
-            throw err;
+            utils.error(res, err);
           });
   });
   
@@ -117,9 +116,7 @@ module.exports = function(router, Story) {
         res.redirect('/dashboard');
       }
     ).catch(err => {
-      console.log(err);
-      
-      throw err;
+      utils.error(res, err);
     });
   });
 
@@ -132,9 +129,7 @@ module.exports = function(router, Story) {
       res.redirect('/dashboard')
     })
     .catch(err => {
-      console.log(err);
-      
-      throw err;
+      utils.error(res, err);
     });          
   });
 
