@@ -71,9 +71,11 @@ module.exports = function(router, Story) {
   });
 
   router.get('/:id/edit', ensureAuthenticated, (req, res) => {
-    
+/*    
     Story.findOne({ _id: req.params.id, author: req.session.userId })
           .populate('author')
+*/
+    utils.findUserStory(Story, req.params.id, req.session.userId)          
           .then(story => {
             if(story) {
               res.render(

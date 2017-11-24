@@ -7,5 +7,9 @@ module.exports = {
     res.flash('error_msg', msg);
     
     res.redirect(redirectUrl);
+  },
+  findUserStory: (Story, id, userId) => {
+    return Story.findOne({ _id: id, author: userId })
+                .populate('author');
   }
 }
