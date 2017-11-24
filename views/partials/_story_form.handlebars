@@ -7,9 +7,9 @@
 <div class="row">
   <div class="input-field">
     <select name="status" id="status">
-      <option value="public" {{selected story.status public}}>Public</option>
-      <option value="private" {{selected story.status private}}>Private</option>
-      <option value="unpublished" {{selected story.status unpublished}}>Unpublished</option>
+      <option value="public" {{selected story.status 'public'}}>Public</option>
+      <option value="private" {{selected story.status 'private'}}>Private</option>
+      <option value="unpublished" {{selected story.status 'unpublished'}}>Unpublished</option>
     </select>
     <label for="status">Status</label>
   </div>
