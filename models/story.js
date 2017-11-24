@@ -3,14 +3,14 @@
 module.exports = function(mongoose) {
   const Schema = mongoose.Schema;
 
-  mongoose.model(
+  return mongoose.model(
     'story',
     new Schema(
       {
         title: {
           type: String,
           required: true,
-          min: 5,
+          minlength: 5,
           max: 20
         },
         status: {
@@ -20,7 +20,7 @@ module.exports = function(mongoose) {
         description: {
           type: String,
           required: true,
-          min: 50
+          minlength: 50
         },
         allowComments: {
           type: Boolean,
@@ -30,7 +30,7 @@ module.exports = function(mongoose) {
           commentText: {
             type: String,
             required: true,
-            min: 10,
+            minlength: 10,
             max: 200
           },
           commentDate: {
@@ -56,6 +56,4 @@ module.exports = function(mongoose) {
     ),
     'stories'
   );
-
-  return mongoose.model('story');
 };
