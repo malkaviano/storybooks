@@ -41,7 +41,8 @@ module.exports = function(router, Story) {
         }
       )
       .catch(err => {
-        console.log(`Catch: ${err}`);
+        console.log(err.errors['title'].message);
+        console.log(err.errors['description'].message);
 
         res.redirect('/');
       });
