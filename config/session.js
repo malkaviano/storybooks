@@ -10,12 +10,10 @@ module.exports = function() {
 
   store.clear(result => console.log(result));
 
-  session({
+  return session({
     secret: process.env.SESSION,
     resave: defaults.sessionResave,
     saveUninitialized: defaults.sessionSaveUninitialized,
     store: store
   });
-  
-  return session;
 };
