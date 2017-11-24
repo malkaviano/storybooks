@@ -35,8 +35,12 @@
     
       $('select').material_select();
     
-      CKEDITOR.replace('description');      
+           
     });
+
+    CKEDITOR.replace('description'); 
+
+    $('.alert').append('<button class="waves-effect btn-flat close"><i class="fa fa-window-close"></i></button>');
 
     $('.body-container').on('click', '.alert .close', function() {
         $(this).parent().fadeOut(300, function() {
