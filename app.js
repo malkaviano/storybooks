@@ -30,9 +30,9 @@ app.use(methodOverride('_method'));
 app.engine(viewEngine.name, viewEngine.config());
 app.set('view engine', viewEngine.name);
 
-const indexRouter = require('./routes/index')(express.Router()),
+const indexRouter = require('./routes/index'),
       authRouter = require('./routes/auth'),
-      storiesRouter = require('./routes/stories')(express.Router());
+      storiesRouter = require('./routes/stories');
 
 app.use('/', indexRouter);
 app.use('/auth', authRouter);

@@ -2,9 +2,11 @@
 
 const {ensureAuthenticated, ensureAuthorized} = require('../helpers/authenticate'),
       utils = require('../helpers/utils'),
-      Story = require('../models/story').model;
+      Story = require('../models/story').model,
+      express = require('express'),
+      router = express.Router();
 
-module.exports = function(router) {
+module.exports = (function() {
   router.get('/', (req, res) => {
     Story.find({ status: "public" })
           .populate('author')
@@ -131,4 +133,4 @@ module.exports = function(router) {
   });
 
   return router;
-};
+})();

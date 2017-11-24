@@ -2,9 +2,11 @@
 
 const {ensureAuthenticated, ensureAuthorized} = require('../helpers/authenticate'),
       utils = require('../helpers/utils'),
-      Story = require('../models/story').model;
+      Story = require('../models/story').model,
+      express = require('express'),
+      router = express.Router();
 
-module.exports = function(router) {
+module.exports = (function() {
   router.get('/', (req, res) => {
     res.render('index/welcome');
   });
@@ -29,4 +31,4 @@ module.exports = function(router) {
   });
 
   return router;
-};
+})();
