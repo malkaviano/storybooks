@@ -6,7 +6,7 @@ const {url, oauth2Client, plus} = require('../config/google_oauth2'),
       express = require('express'),
       router = express.Router();
 
-module.exports = function() {
+module.exports = (function() {
   router.get('/login', function(req, res) {
     res.redirect(url);
   });
@@ -105,4 +105,4 @@ module.exports = function() {
   });
 
   return router;
-};
+})();
