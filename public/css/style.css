@@ -28,7 +28,7 @@ footer {
   display: inline;
 }
 
-.alert-close {
+.alert .close {
   position: absolute;
   top: 50%;
   right: 0.5rem;
