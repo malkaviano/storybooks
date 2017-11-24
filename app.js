@@ -1,7 +1,6 @@
 'use strict';
 
-const express = require('express'),
-      app = express(),
+const app = require('express')(),
       path = require('path'),
       parser = require('body-parser'),      
       session = require('./config/session'),
@@ -30,8 +29,6 @@ app.use(methodOverride('_method'));
 
 app.engine(viewEngine.name, viewEngine.config());
 app.set('view engine', viewEngine.name);
-
-
 
 app.use('/', routes.indexRouter);
 app.use('/auth', routes.authRouter);
