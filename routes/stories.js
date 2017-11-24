@@ -138,7 +138,7 @@ module.exports = (function() {
               errors.push({ message: err.errors[prop].message });
             }
     
-            res.render('stories/:id/edit', { errors: errors, story: story });
+            res.render('stories/edit', { errors: errors, story: story });
           }
         );        
       },
