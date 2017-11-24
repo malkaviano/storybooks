@@ -107,17 +107,6 @@ module.exports = (function() {
 
     utils.resolvePromise(
       Story.helper.findUserStory(req.params.id, req.session.userId),
-/*      
-        { _id: req.params.id, author: req.session.userId },
-        { $set: 
-          { 
-            title: req.body.title,
-            status: req.body.status,
-            description: req.body.description,
-            allowComments: req.body.allowComments,
-          }
-        }
-*/    ,
       story => {
         story.title = req.body.title,
         story.status = req.body.status,
