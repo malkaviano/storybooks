@@ -3,7 +3,7 @@
 const mongoose = require('../config/mongodb');
 
 module.exports = {
-  model: function() {
+  model: (function() {
     const Schema = mongoose.Schema;
 
     return mongoose.model(
@@ -63,5 +63,5 @@ module.exports = {
       ),
       'stories'
     );
-  }
+  })()
 };
