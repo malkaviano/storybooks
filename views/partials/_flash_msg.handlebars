@@ -1,17 +1,13 @@
 {{#if flash.info_msg}}
-<div class="card-panel green lighten-4 green-text text-darken-4 alert">
+<div class="card-panel green lighten-4 green-text text-darken-4">
   {{flash.info_msg}}
   <button class="waves-effect btn-flat right close"><i class="fa fa-window-close"></i></button>
 </div>
 {{/if}}
 
 {{#if flash.error_msg}}
-  <div class="alert alert-danger">
-    {{flash.error_msg}}
-  </div>
-{{/if}}
-
-<div class="card-panel green lighten-4 green-text text-darken-4">
-  {{flash.info_msg}}
+<div class="card-panel red lighten-4 red-text text-darken-4">
+  {{flash.error_msg}}
   <button class="waves-effect btn-flat right close"><i class="fa fa-window-close"></i></button>
 </div>
+{{/if}}
