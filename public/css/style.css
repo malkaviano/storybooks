@@ -28,8 +28,7 @@ footer {
   display: inline;
 }
 
-.alert.close {
-  position: absolute;
+.alert .close {
   top: 50%;
   color: inherit;
 }
