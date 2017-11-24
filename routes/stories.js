@@ -43,7 +43,7 @@ module.exports = function(router, Story) {
       .catch(err => {
         const errors = [];        
 
-        for(item in err.errors) {
+        for(const item in err.errors) {
           console.log(item);
 
           errors.push({ message: item.message });
