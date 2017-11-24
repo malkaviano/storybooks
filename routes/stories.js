@@ -8,19 +8,18 @@ const {ensureAuthenticated, ensureAuthorized} = require('../helpers/authenticate
 
 module.exports = (function() {
   router.get('/', (req, res) => {
-    Story.find({ status: "public" })
-          .populate('author')
-          .then(stories => {
-            res.render(
-              'stories/index',
-              {
-                stories: stories
-              }
-            );
-          })
-          .catch(err => {
-            utils.error(res, err);
-          });
+    Story.helper.findPublicStories()
+                .then(stories => {
+                  res.render(
+                    'stories/index',
+                    {
+                      stories: stories
+                    }
+                  );
+                })
+                .catch(err => {
+                  utils.error(res, err);
+                });
   });
 
   router.get('/new', ensureAuthenticated, (req, res) => {

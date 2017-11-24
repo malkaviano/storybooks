@@ -68,9 +68,7 @@ const mongoose = require('../config/mongodb'),
 module.exports = {
   model: model,
   helper: {
-    findUserStory: (id, userId) => {
-      return model.findOne({ _id: id, author: userId })
-                  .populate('author');
-    }
+    findUserStory: (id, userId) => model.findOne({ _id: id, author: userId }).populate('author'),
+    findPublicStories: () => model.find({ status: "public" }).populate('author')
   }
 };
