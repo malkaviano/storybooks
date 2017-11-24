@@ -22,10 +22,11 @@ module.exports = {
   selected: (selected, options) => {
     console.log(options.fn(this));
 
+    const str = ` value=\"${selected}\"`;
     return options.fn(this)
                   .replace(
-                    new RegExp(' value=\"' + selected + '\"'),
-                    '$& selected="selected"'
+                    str,
+                    str + ' selected="selected"'
                   );
   }
 };
