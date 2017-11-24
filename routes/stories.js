@@ -93,6 +93,8 @@ module.exports = function(router, Story) {
       }
     )
     .then(story => {
+      res.flash('info_msg', 'Story was modified');
+
       res.redirect('/dashboard');
     })
     .catch(err => {
