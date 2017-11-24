@@ -3,9 +3,9 @@
 const mongoose = require('../config/mongodb');
 
 module.exports = {
-  model: function() {
+  model: (function() {
     
-    mongoose.model('user', new mongoose.Schema({
+    return mongoose.model('user', new mongoose.Schema({
       name: {
         type: String
       },
@@ -27,7 +27,5 @@ module.exports = {
         default: Date.now
       }
     }));
-
-    return mongoose.model('user');
-  }
+  })()
 };
