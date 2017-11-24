@@ -1,11 +1,11 @@
 'use strict';
 
-const indexRouter = require('../routes/index'),
-      authRouter = require('../routes/auth'),
-      storiesRouter = require('../routes/stories');
+const index = require('../routes/index'),
+      auth = require('../routes/auth'),
+      stories = require('../routes/stories');
 
 module.exports = {
-  indexRouter: indexRouter,
-  authRouter: authRouter,
-  storiesRouter: storiesRouter
+  index: { path: "/", router: index },
+  auth: { path: "/auth", router: auth },
+  stories: { path: "/stories", router: stories }
 };

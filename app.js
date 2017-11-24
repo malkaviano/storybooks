@@ -1,11 +1,12 @@
 'use strict';
 
-const app = require('express')(),
+const express = require('express'),
+      app = express(),
       path = require('path'),
-      parser = require('body-parser'),      
-      session = require('./config/session'),
-      flash = require('./config/flash'),
+      parser = require('body-parser'),
       methodOverride = require('method-override'),
+      session = require('./config/session'),
+      flash = require('./config/flash'),      
       viewEngine = require('./config/handlebars'),
       routes = require('./config/routes'),
       port = process.env.PORT || 3000;
@@ -30,10 +31,14 @@ app.use(methodOverride('_method'));
 app.engine(viewEngine.name, viewEngine.config());
 app.set('view engine', viewEngine.name);
 
+for(name in routes) {
+      app.use(routes[name].path, routes[name].router);
+}
+/*
 app.use('/', routes.indexRouter);
 app.use('/auth', routes.authRouter);
 app.use('/stories', routes.storiesRouter);
-
+*/
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
