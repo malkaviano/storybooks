@@ -8,8 +8,14 @@ function logErrorAndRedirect(res, log, msg = 'Invalid Operation', redirectUrl = 
   res.redirect(redirectUrl);
 }
 
-function fillObject() {
+function fillObject(obj, values) {
+  for(const prop in obj) {
+    if(values[prop]) {
+      obj[prop] = values[prop];
+    }
+  }
 
+  return obj;
 }
 
 module.exports = {
@@ -17,5 +23,6 @@ module.exports = {
   resolvePromise: (promise, resolve, error) => {
     promise.then(resolve)
             .catch(error);
-  }
+  },
+  fillObject: fillObject
 }

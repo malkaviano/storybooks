@@ -110,11 +110,13 @@ function registerRoutes() {
       Story.helper.findUserStory(req.params.id, req.session.userId),
       story => {
         console.log(req.body);
-        
+/*        
         story.title = req.body.title,
         story.status = req.body.status,
         story.description = req.body.description,
         story.allowComments = req.body.allowComments,
+*/
+        utils.fillObject(story, req.body);
         
         utils.resolvePromise(
           story.save(),
