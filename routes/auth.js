@@ -2,6 +2,7 @@
 
 const {url, oauth2Client, plus} = require('../config/google_oauth2'),
       defaults = require('../config/defaults.json'),
+      mongoose = require('./config/mongodb'),
       User = require('./models/user')(mongoose).model;
 
 module.exports = function(router) {
