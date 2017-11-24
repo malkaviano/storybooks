@@ -31,17 +31,19 @@ module.exports = function(router, Story) {
 
     new Story(req.body)
       .save()
-      .then(story => {
-        console.log(story);
+      .then(
+        story => {
+          console.log(story);
 
-        res.flash('info_msg', 'Story was created');
+          res.flash('info_msg', 'Story was created');
 
-        res.redirect('/dashboard');
-      })
+          res.redirect('/dashboard');
+        }
+      )
       .catch(err => {
-        console.log(err);
+        console.log(`Catch: ${err}`);
 
-        throw err;
+        res.redirect('/');
       });
   });
 
@@ -95,11 +97,6 @@ module.exports = function(router, Story) {
     .then(
       story => {
         res.flash('info_msg', 'Story was modified');
-
-        res.redirect('/dashboard');
-      },
-      err => {
-        console.log(err);
 
         res.redirect('/dashboard');
       }
