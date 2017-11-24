@@ -17,7 +17,9 @@ module.exports = function(router, Story) {
           .catch(err => {
             console.log(err);
             
-            throw err;
+            res.flash('info_msg', 'Database error occurred');
+            
+            res.redirect('/');
           });
   });
 
@@ -56,15 +58,23 @@ module.exports = function(router, Story) {
     Story.findOne({ _id: req.params.id, status: "public" })
           .populate('author')
           .then(story => {
-            res.render(
-              'stories/show', {
-              story: story
-            });
+            if(story) {
+              res.render(
+                'stories/show',
+                {
+                  story: story
+                }
+              );
+            } else {
+              res.flash('error_msg', "Story not found");
+              
+              res.redirect('/stories');
+            }
           })
           .catch(err => {
             console.log(err);
             
-            res.flash('error_msg', "Story wasn't found");
+            res.flash('error_msg', "Invalid Story");
             
             res.redirect('/stories');
           });
