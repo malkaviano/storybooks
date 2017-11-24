@@ -31,7 +31,7 @@ app.use(methodOverride('_method'));
 app.engine(viewEngine.name, viewEngine.config());
 app.set('view engine', viewEngine.name);
 
-for(name in routes) {
+for(const name in routes) {
       app.use(routes[name].path, routes[name].router);
 }
 /*
