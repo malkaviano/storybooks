@@ -18,5 +18,11 @@ module.exports = {
     return newStr;
   },
   striptags: striptags,
-  formatDate: (date, format) => moment(date).format(format)
+  formatDate: (date, format) => moment(date).format(format),
+  selected: (selected, option) => {
+    if(selected === option)
+      return ' selected';
+    
+    return '';
+  }
 };

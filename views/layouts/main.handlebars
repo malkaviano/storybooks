@@ -38,13 +38,13 @@
            
     });
 
-    //CKEDITOR.replace('description');
-
     $('.body-container').on('click', '.close', function() {
         $(this).parent().fadeOut(300, function() {
             $(this).remove();
         });
     });
+
+    CKEDITOR.replace('description');
   </script>
 </body>
 </html>

@@ -1,7 +1,7 @@
 'use strict';
 
 const exphbs = require('express-handlebars'),
-      {truncate, striptags, formatDate} = require('../helpers/hbs');
+      {truncate, striptags, formatDate, selected} = require('../helpers/hbs');
 
 module.exports = function(app) {
   app.engine(
@@ -10,7 +10,8 @@ module.exports = function(app) {
       helpers: {
         truncate: truncate,
         striptags: striptags,
-        formatDate: formatDate
+        formatDate: formatDate,
+        selected: selected
       },
       defaultLayout: 'main' 
     })
