@@ -2,8 +2,7 @@
 
 const {ensureAuthenticated, ensureAuthorized} = require('../helpers/authenticate'),
       utils = require('../helpers/utils'),
-      mongoose = require('./config/mongodb'),
-      Story = require('./models/story')(mongoose).model;
+      Story = require('./models/story').model;
 
 module.exports = function(router) {
   router.get('/', (req, res) => {

@@ -1,6 +1,6 @@
 'use strict';
 
-const mongoose = require('./config/mongodb');
+const mongoose = require('../config/mongodb');
 
 module.exports = {
   model: function() {
