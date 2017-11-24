@@ -29,6 +29,7 @@ footer {
 }
 
 .close {
-  vertical-align: center;
+  position: absolute;
+  top: 10px;
   color: inherit;
 }
