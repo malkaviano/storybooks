@@ -103,8 +103,11 @@ module.exports = (function() {
   
   router.patch('/:id', ensureAuthenticated, (req, res) => {
     
+    req.body.allowComments = !!req.body.allowComments;
+
     utils.resolvePromise(
-      Story.model.update(
+      Story.helper.findUserStory(req.params.id, req.session.userId),
+/*      
         { _id: req.params.id, author: req.session.userId },
         { $set: 
           { 
@@ -114,11 +117,30 @@ module.exports = (function() {
             allowComments: req.body.allowComments,
           }
         }
-      ),
+*/    ,
       story => {
-        res.flash('info_msg', 'Story was modified');
-
-        res.redirect('/dashboard');
+        story.title = req.body.title,
+        story.status = req.body.status,
+        story.description = req.body.description,
+        story.allowComments = req.body.allowComments,
+        
+        utils.resolvePromise(
+          story.save(),
+          saved => {
+            res.flash('info_msg', 'Story was modified');
+            
+            res.redirect('/dashboard');
+          },
+          err => {
+            const errors = [];        
+    
+            for(const prop in err.errors) {
+              errors.push({ message: err.errors[prop].message });
+            }
+    
+            res.render('stories/:id/edit', { errors: errors, story: story });
+          }
+        );        
       },
       err => {
         utils.error(res, err);
