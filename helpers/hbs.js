@@ -20,8 +20,6 @@ module.exports = {
   striptags: striptags,
   formatDate: (date, format) => moment(date).format(format),
   selected: (selected, options) => {
-    console.log(options.fn(this));
-
     const str = ` value="${selected}"`;
     return options.fn(this)
                   .replace(
