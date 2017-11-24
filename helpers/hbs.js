@@ -22,7 +22,7 @@ module.exports = {
   selected: (selected, options) => {
     console.log(options.fn(this));
 
-    const str = ` value=\"${selected}\"`;
+    const str = ` value="${selected}"`;
     return options.fn(this)
                   .replace(
                     str,
