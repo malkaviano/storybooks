@@ -43,8 +43,11 @@ module.exports = function(router, Story) {
       .catch(err => {
         const errors = [];
 
-        errors.push(err.errors['title']);
-        errors.push(err.errors['description']);
+        for (i = 0; i < err.errors.length; i++) { 
+          errors.push(err.errors[i]);
+        }
+        
+        //errors.push(err.errors['description']);
 
         res.render('stories/new', { errors: errors });
       });
