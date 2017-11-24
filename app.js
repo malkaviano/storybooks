@@ -5,6 +5,7 @@ const express = require('express'),
       app = express(),
       parser = require('body-parser'),      
       session = require('./config/session'),
+      flash = require('./config/flash'),
       methodOverride = require('method-override'),
       port = process.env.PORT || 3000;
 
@@ -21,9 +22,10 @@ app.use(function(req, res, next) {
       next();
 });
 
+app.use(flash());
+
 app.use(methodOverride('_method'));
 
-require('./config/flash')(app);
 require('./config/handlebars')(app);
 
 const indexRouter = require('./routes/index')(express.Router()),
