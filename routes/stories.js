@@ -28,26 +28,25 @@ module.exports = function(router, Story) {
     req.body.allowComments = !!req.body.allowComments;
     req.body.author = req.session.userId;
 
-    new Story(req.body)
-      .save()
-      .then(
-        story => {
-          console.log(story);
+    const story = new Story(req.body);
+    
+    story.save()
+          .then(
+            story => {
+              res.flash('info_msg', 'Story was created');
 
-          res.flash('info_msg', 'Story was created');
+              res.redirect('/dashboard');
+            }
+          )
+          .catch(err => {
+            const errors = [];        
 
-          res.redirect('/dashboard');
-        }
-      )
-      .catch(err => {
-        const errors = [];        
+            for(const prop in err.errors) {
+              errors.push({ message: err.errors[prop].message });
+            }
 
-        for(const prop in err.errors) {
-          errors.push({ message: err.errors[prop].message });
-        }
-
-        res.render('stories/new', { errors: errors });
-      });
+            res.render('stories/new', { errors: errors, story: story });
+          });
   });
 
   router.get('/:id', (req, res) => {
@@ -63,9 +62,7 @@ module.exports = function(router, Story) {
                 }
               );
             } else {
-              res.flash('error_msg', "Story not found");
-              
-              res.redirect('/stories');
+              utils.error(res, `ID: ${req.params.id} - Public`, "Public Story was not found");
             }
           })
           .catch(err => {
@@ -86,9 +83,7 @@ module.exports = function(router, Story) {
                 }
               );
             } else {
-              res.flash('error_msg', "Story not found");
-              
-              res.redirect('/dashboard');
+              utils.error(res, `ID: ${req.params.id} - User: ${req.session.userId}`, "User Story was not found");
             }
           })
           .catch(err => {
