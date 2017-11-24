@@ -44,13 +44,8 @@ module.exports = function(router, Story) {
         const errors = [];        
 
         for(const prop in err.errors) {
-          //console.log(item);
-
           errors.push({ message: err.errors[prop].message });
         }
-        //err.errors.forEach((item, index) => errors.push(item));
-        
-        //errors.push(err.errors['description']);
 
         res.render('stories/new', { errors: errors });
       });
@@ -69,7 +64,9 @@ module.exports = function(router, Story) {
           .catch(err => {
             console.log(err);
             
-            throw err;
+            res.flash('error_msg', "Story wasn't found");
+            
+            res.redirect('/stories');
           });
   });
 
