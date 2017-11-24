@@ -3,11 +3,8 @@
 const express = require('express'),
       path = require('path'),
       app = express(),
-      parser = require('body-parser'),
-      mongoose = require('./config/mongodb'),
-      //User = require('./models/user')(mongoose).model,
-      //Story = require('./models/story')(mongoose).model,
-      session = require('./config/session')(app, mongoose.connection),
+      parser = require('body-parser'),      
+      session = require('./config/session')(app),
       methodOverride = require('method-override'),
       port = process.env.PORT || 3000;
 

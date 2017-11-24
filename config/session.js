@@ -1,8 +1,9 @@
 'use strict';
 
-const defaults = require('./defaults.json');
+const defaults = require('./defaults.json'),
+      connection = require('./mongodb').connection;
 
-module.exports = function(app, connection) {
+module.exports = function(app) {
   const session = require('express-session'),
         MongoStore = require('connect-mongo')(session),
         store = new MongoStore({ mongooseConnection: connection });
