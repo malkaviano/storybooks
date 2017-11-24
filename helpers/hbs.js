@@ -19,5 +19,13 @@ module.exports = {
   },
   striptags: striptags,
   formatDate: (date, format) => moment(date).format(format),
-  selected: (selected, option) => selected === option
+  selected: (selected, option) => {
+    console.log(options.fn(this));
+
+    return options.fn(this)
+                  .replace(
+                    new RegExp(' value=\"' + selected + '\"'),
+                    '$& selected="selected"'
+                  );
+  }
 };
