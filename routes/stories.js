@@ -75,8 +75,28 @@ module.exports = function(router, Story) {
     Story.findOne({ _id: req.params.id, author: req.session.userId })
           .populate('author')
 */
-    utils.findUserStory(Story, req.params.id, req.session.userId)          
-          .then(story => {
+    const promise = utils.findUserStory(Story, req.params.id, req.session.userId)          
+    utils.resolvePromise(
+      promise,
+      story => {
+        if(story) {
+          res.render(
+            'stories/edit',
+            {
+              story: story
+            }
+          );
+        } else {
+          utils.error(res, `ID: ${req.params.id} - User: ${req.session.userId}`, "User Story was not found");
+        }
+      },
+      err => {
+        utils.error(res, err);
+      }
+    );
+
+/*    
+    .then(story => {
             if(story) {
               res.render(
                 'stories/edit',
@@ -91,6 +111,7 @@ module.exports = function(router, Story) {
           .catch(err => {
             utils.error(res, err);
           });
+*/
   });
   
   router.patch('/:id', ensureAuthenticated, (req, res) => {
