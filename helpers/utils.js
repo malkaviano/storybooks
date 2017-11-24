@@ -10,7 +10,7 @@ function logErrorAndRedirect(res, log, msg = 'Invalid Operation', redirectUrl = 
 
 function fillObject(obj, values) {
   for(const prop in obj) {
-    if(values[prop]) {
+    if(values[prop] !== undefined) {
       obj[prop] = values[prop];
     }
   }
