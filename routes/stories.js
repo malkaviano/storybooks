@@ -44,7 +44,10 @@ module.exports = function(router, Story) {
         const errors = [];
 
         console.log(err.errors);
-        
+
+        for(item in err.errors) {
+          errors.push({ message: item.message });
+        }
         //err.errors.forEach((item, index) => errors.push(item));
         
         //errors.push(err.errors['description']);
