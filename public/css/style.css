@@ -30,6 +30,6 @@ footer {
 
 .close {
   position: relative;
-  top: 10px;
+  top: -20px;
   color: inherit;
 }
