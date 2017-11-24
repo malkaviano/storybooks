@@ -29,6 +29,6 @@ footer {
 }
 
 .alert .close {
-  top: 50%;
+  vertical-align: center;
   color: inherit;
 }
