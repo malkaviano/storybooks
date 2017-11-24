@@ -41,10 +41,12 @@ module.exports = function(router, Story) {
         }
       )
       .catch(err => {
-        console.log(err.errors['title'].message);
-        console.log(err.errors['description'].message);
+        const errors = [];
 
-        res.redirect('/');
+        errors.push(err.errors['title']);
+        errors.push(err.errors['description']);
+
+        res.render('stories/new', { errors: errors });
       });
   });
 
