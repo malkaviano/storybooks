@@ -15,5 +15,5 @@ module.exports = {
       defaultLayout: 'main' 
     });
   },
-  name: 'ehbs'
+  name: 'handlebars'
 };
