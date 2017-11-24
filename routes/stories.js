@@ -2,7 +2,7 @@
 
 const {ensureAuthenticated, ensureAuthorized} = require('../helpers/authenticate'),
       utils = require('../helpers/utils'),
-      Story = require('../models/story').model,
+      {Story, StoryHelpers} = require('../models/story'),
       express = require('express'),
       router = express.Router();
 
@@ -76,7 +76,7 @@ module.exports = (function() {
   router.get('/:id/edit', ensureAuthenticated, (req, res) => {
      
     utils.resolvePromise(
-      Story.findUserStory(req.params.id, req.session.userId),
+      StoryHelpers.findUserStory(req.params.id, req.session.userId),
       story => {
         if(story) {
           res.render(
