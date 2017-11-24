@@ -62,6 +62,23 @@ module.exports = function(router, Story) {
           });
   });
 
+  router.get('/:id/edit', ensureAuthenticated, (req, res) => {
+    
+        Story.findOne({ _id: req.params.id })
+              .populate('author')
+              .then(story => {
+                res.render(
+                  'stories/edit', {
+                  story: story
+                });
+              })
+              .catch(err => {
+                console.log(err);
+                
+                throw err;
+              });
+      });
+
   router.delete('/:id', ensureAuthenticated, (req, res) => {
 
     Story.remove({ _id: req.params.id })
