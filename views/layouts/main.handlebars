@@ -37,8 +37,9 @@
     
       CKEDITOR.replace('description');
 
-      $('body-container').on('click', '.alert_close', function() {
-        $(this).parent('alert_box').fadeOut( "fast");
+      $('body-container').on('click', '#alert_close', function() {
+        alert($(this).parent('#alert_box'));
+        $(this).parent('#alert_box').fadeOut( "fast");
       });
     });
   </script>
