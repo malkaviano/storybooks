@@ -11,7 +11,8 @@ module.exports = function(mongoose) {
           type: String,
           required: true,
           minlength: 5,
-          max: 20
+          maxlength: 20,
+          trim: true
         },
         status: {
           type: String,
@@ -20,7 +21,9 @@ module.exports = function(mongoose) {
         description: {
           type: String,
           required: true,
-          minlength: 50
+          minlength: 50,
+          maxlength: 1000,
+          trim: true
         },
         allowComments: {
           type: Boolean,
@@ -31,7 +34,8 @@ module.exports = function(mongoose) {
             type: String,
             required: true,
             minlength: 10,
-            max: 200
+            maxlength: 200,
+            trim: true
           },
           commentDate: {
             type: Date,
