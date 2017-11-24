@@ -26,7 +26,7 @@ module.exports = {
     return options.fn(this)
                   .replace(
                     str,
-                    str + ' selected="selected"'
+                    `${str} selected="selected"`
                   );
   }
 };
