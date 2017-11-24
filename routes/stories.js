@@ -109,6 +109,8 @@ function registerRoutes() {
     utils.resolvePromise(
       Story.helper.findUserStory(req.params.id, req.session.userId),
       story => {
+        console.log(req.body);
+        
         story.title = req.body.title,
         story.status = req.body.status,
         story.description = req.body.description,

@@ -8,6 +8,10 @@ function logErrorAndRedirect(res, log, msg = 'Invalid Operation', redirectUrl = 
   res.redirect(redirectUrl);
 }
 
+function fillObject() {
+
+}
+
 module.exports = {
   error: logErrorAndRedirect,
   resolvePromise: (promise, resolve, error) => {

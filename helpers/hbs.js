@@ -1,7 +1,6 @@
 'use strict';
 
-const striptags = require('striptags'),
-      moment = require('moment'),
+const moment = require('moment'),
       htmlToText = require('html-to-text');
 
 module.exports = {
@@ -18,7 +17,6 @@ module.exports = {
 
     return newStr;
   },
-  striptags: striptags,
   formatDate: (date, format) => moment(date).format(format),
   selected: (selected, options) => {
     const str = ` value="${selected}"`;
