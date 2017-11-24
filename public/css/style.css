@@ -31,7 +31,5 @@ footer {
 .alert .close {
   position: absolute;
   top: 50%;
-  right: 0.5rem;
-
   color: inherit;
 }
