@@ -27,12 +27,11 @@ footer {
 #delete-form {
   display: inline;
 }
-
-.close_icon_style {
+.alert .close {
   position: absolute;
-  right: 10px;
-  top: 10px;
-  font-size: 20px;
-  color: white;
-  cursor:pointer; 
+  top: 50%;
+  right: 0.5rem;
+
+  color: inherit;
+  margin-top: -18px;
 }
