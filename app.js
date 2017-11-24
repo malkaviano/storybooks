@@ -18,6 +18,9 @@ app.use(parser.json());
 
 app.use(methodOverride('_method'));
 
+require('./config/flash')(app);
+require('./config/handlebars')(app);
+
 const indexRouter = require('./routes/index')(express.Router(), Story),
       authRouter = require('./routes/auth')(express.Router(), User),
       storiesRouter = require('./routes/stories')(express.Router(), Story);
@@ -25,9 +28,6 @@ const indexRouter = require('./routes/index')(express.Router(), Story),
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/stories', storiesRouter);
-
-require('./config/handlebars')(app);
-require('./config/flash')(app);
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
