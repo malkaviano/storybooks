@@ -19,7 +19,7 @@ module.exports = {
   },
   striptags: striptags,
   formatDate: (date, format) => moment(date).format(format),
-  selected: (selected, option) => {
+  selected: (selected, options) => {
     console.log(options.fn(this));
 
     return options.fn(this)
