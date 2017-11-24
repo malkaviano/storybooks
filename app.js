@@ -27,6 +27,7 @@ app.use('/auth', authRouter);
 app.use('/stories', storiesRouter);
 
 require('./config/handlebars')(app);
+require('./config/flash');
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);

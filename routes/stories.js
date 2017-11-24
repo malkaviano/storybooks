@@ -60,11 +60,11 @@ module.exports = function(router, Story) {
           });
   });
 
-  router.delete('/:id', (req, res) => {
+  router.delete('/:id', ensureAuthenticated, (req, res) => {
 
     Story.remove({ _id: req.params.id })
     .then(() => {
-      //res.flash('info_msg', 'Idea was deleted!');
+      res.flash('info_msg', 'Story was deleted');
 
       res.redirect('/dashboard')
     })
