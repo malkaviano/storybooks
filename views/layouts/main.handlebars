@@ -14,7 +14,7 @@
   {{> _header }}
   
   <main>
-    <div class="container body-container">
+    <div class="container">
       {{> _flash_msg }}
       {{{body}}}
     </div>
@@ -36,11 +36,6 @@
       $('select').material_select();
     
       CKEDITOR.replace('description');
-
-      $('.body-container').on('click', 'i#alert_close', function() {
-        alert(this);
-        $(this).parent('#alert_box').fadeOut( "fast");
-      });
     });
   </script>
 </body>
