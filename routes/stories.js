@@ -41,11 +41,11 @@ module.exports = function(router, Story) {
         }
       )
       .catch(err => {
-        const errors = [];
-
-        console.log(err.errors);
+        const errors = [];        
 
         for(item in err.errors) {
+          console.log(item);
+
           errors.push({ message: item.message });
         }
         //err.errors.forEach((item, index) => errors.push(item));
