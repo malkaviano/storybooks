@@ -3,21 +3,17 @@
 const exphbs = require('express-handlebars'),
       {truncate, striptags, formatDate, selected} = require('../helpers/hbs');
 
-module.exports = function(app) {
-  app.engine(
-    'handlebars',
-    exphbs({
+module.exports = {
+  config: function() {
+    return exphbs({
       helpers: {
-        truncate: truncate,
-        striptags: striptags,
-        formatDate: formatDate,
-        selected: selected
+      truncate: truncate,
+      striptags: striptags,
+      formatDate: formatDate,
+      selected: selected
       },
       defaultLayout: 'main' 
-    })
-  );
-
-  app.set('view engine', 'handlebars');
-
-  return app;
-}
+    });
+  },
+  extension: 'handlebars'
+};
