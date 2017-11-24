@@ -36,6 +36,11 @@
       $('select').material_select();
     
       CKEDITOR.replace('description');
+
+      $('#alert_close').click(function(){
+        $('#alert_box').fadeOut( "fast", function() {
+      });
+  });
     });
   </script>
 </body>

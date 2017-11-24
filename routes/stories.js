@@ -21,6 +21,10 @@ module.exports = function(router, Story) {
           });
   });
 
+  router.get('/new', ensureAuthenticated, (req, res) => {
+    res.render('stories/new');
+  });
+
   router.post('/', ensureAuthenticated, (req, res) => {
     req.body.allowComments = !!req.body.allowComments;
     req.body.author = req.session.userId;
@@ -30,17 +34,15 @@ module.exports = function(router, Story) {
       .then(story => {
         console.log(story);
 
-        res.redirect('/stories');
+        res.flash('info_msg', 'Story was created');
+
+        res.redirect('/dashboard');
       })
       .catch(err => {
         console.log(err);
 
         throw err;
       });
-  });
-
-  router.get('/new', ensureAuthenticated, (req, res) => {
-    res.render('stories/new');
   });
 
   router.get('/:id', (req, res) => {
