@@ -64,7 +64,7 @@ module.exports = {
       'stories'
     );
   })(),
-  helpers: {
+  helper: {
     findUserStory: (id, userId) => {
       return this.model.findOne({ _id: id, author: userId })
                         .populate('author');

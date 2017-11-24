@@ -2,7 +2,7 @@
 
 const {ensureAuthenticated, ensureAuthorized} = require('../helpers/authenticate'),
       utils = require('../helpers/utils'),
-      {Story, StoryHelpers} = require('../models/story'),
+      Story = require('../models/story'),
       express = require('express'),
       router = express.Router();
 
@@ -31,7 +31,7 @@ module.exports = (function() {
     req.body.allowComments = !!req.body.allowComments;
     req.body.author = req.session.userId;
 
-    const story = new Story(req.body);
+    const story = new Story.model(req.body);
     
     story.save()
           .then(
@@ -54,7 +54,7 @@ module.exports = (function() {
 
   router.get('/:id', (req, res) => {
 
-    Story.findOne({ _id: req.params.id, status: "public" })
+    Story.model.findOne({ _id: req.params.id, status: "public" })
           .populate('author')
           .then(story => {
             if(story) {
@@ -76,7 +76,7 @@ module.exports = (function() {
   router.get('/:id/edit', ensureAuthenticated, (req, res) => {
      
     utils.resolvePromise(
-      StoryHelpers.findUserStory(req.params.id, req.session.userId),
+      Story.helper.findUserStory(req.params.id, req.session.userId),
       story => {
         if(story) {
           res.render(
@@ -97,7 +97,7 @@ module.exports = (function() {
   
   router.patch('/:id', ensureAuthenticated, (req, res) => {
     
-    Story.update(
+    Story.model.update(
       { _id: req.params.id, author: req.session.userId },
       { $set: 
         { 
@@ -121,7 +121,7 @@ module.exports = (function() {
 
   router.delete('/:id', ensureAuthenticated, (req, res) => {
 
-    Story.remove({ _id: req.params.id })
+    Story.model.remove({ _id: req.params.id })
     .then(() => {
       res.flash('info_msg', 'Story was deleted');
 
