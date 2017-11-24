@@ -21,7 +21,7 @@ module.exports = {
   formatDate: (date, format) => moment(date).format(format),
   selected: (selected, option) => {
     if(selected === option)
-      return ' selected="selected" ';
+      return ' selected=\"selected\" ';
     
     return '';
   }
