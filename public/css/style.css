@@ -29,7 +29,7 @@ footer {
 }
 
 .close {
-  position: absolute;
+  position: relative;
   top: 10px;
   color: inherit;
 }
