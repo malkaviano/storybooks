@@ -7,7 +7,7 @@ const express = require('express'),
       session = require('./config/session'),
       flash = require('./config/flash'),
       methodOverride = require('method-override'),
-      viewEngine = require('./config/handlebars');
+      viewEngine = require('./config/handlebars'),
       port = process.env.PORT || 3000;
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -27,12 +27,8 @@ app.use(flash());
 
 app.use(methodOverride('_method'));
 
-app.engine(
-      viewEngine.extension,
-      viewEngine.config()
-);
-  
-app.set('view engine', viewEngine.extension);
+app.engine(viewEngine.name, viewEngine.config());
+app.set('view engine', viewEngine.name);
 
 const indexRouter = require('./routes/index')(express.Router()),
       authRouter = require('./routes/auth')(express.Router()),

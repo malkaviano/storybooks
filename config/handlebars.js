@@ -15,5 +15,5 @@ module.exports = {
       defaultLayout: 'main' 
     });
   },
-  extension: 'handlebars'
+  name: 'handlebars'
 };
