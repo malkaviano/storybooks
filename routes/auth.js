@@ -1,9 +1,10 @@
 'use strict';
 
 const {url, oauth2Client, plus} = require('../config/google_oauth2'),
-      defaults = require('../config/defaults.json');
+      defaults = require('../config/defaults.json'),
+      User = require('./models/user')(mongoose).model;
 
-module.exports = function(router, User) {
+module.exports = function(router) {
   router.get('/login', function(req, res) {
     res.redirect(url);
   });

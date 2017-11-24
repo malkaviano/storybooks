@@ -1,63 +1,67 @@
 'use strict';
 
-module.exports = function(mongoose) {
-  const Schema = mongoose.Schema;
+const mongoose = require('./config/mongodb');
 
-  return mongoose.model(
-    'story',
-    new Schema(
-      {
-        title: {
-          type: String,
-          required: true,
-          minlength: 5,
-          maxlength: 20,
-          trim: true
-        },
-        status: {
-          type: String,
-          default: 'public'
-        },
-        description: {
-          type: String,
-          required: true,
-          minlength: 50,
-          maxlength: 1000,
-          trim: true
-        },
-        allowComments: {
-          type: Boolean,
-          default: true
-        },
-        comments: [{
-          commentText: {
+module.exports = {
+  model: function() {
+    const Schema = mongoose.Schema;
+
+    return mongoose.model(
+      'story',
+      new Schema(
+        {
+          title: {
             type: String,
             required: true,
-            minlength: 10,
-            maxlength: 200,
+            minlength: 5,
+            maxlength: 20,
             trim: true
           },
-          commentDate: {
-            type: Date,
-            default: Date.now
+          status: {
+            type: String,
+            default: 'public'
           },
-          commentUser: {
+          description: {
+            type: String,
+            required: true,
+            minlength: 50,
+            maxlength: 1000,
+            trim: true
+          },
+          allowComments: {
+            type: Boolean,
+            default: true
+          },
+          comments: [{
+            commentText: {
+              type: String,
+              required: true,
+              minlength: 10,
+              maxlength: 200,
+              trim: true
+            },
+            commentDate: {
+              type: Date,
+              default: Date.now
+            },
+            commentUser: {
+              type: Schema.Types.ObjectId,
+              ref: 'user',
+              required: true
+            }
+          }],
+          author: {
             type: Schema.Types.ObjectId,
             ref: 'user',
             required: true
+          },
+          date: {
+            type: Date,
+            default: Date.now
           }
-        }],
-        author: {
-          type: Schema.Types.ObjectId,
-          ref: 'user',
-          required: true
-        },
-        date: {
-          type: Date,
-          default: Date.now
         }
-      }
-    ),
-    'stories'
-  );
+      ),
+      'stories'
+    );
+  }
 };

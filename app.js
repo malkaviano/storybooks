@@ -5,8 +5,8 @@ const express = require('express'),
       app = express(),
       parser = require('body-parser'),
       mongoose = require('./config/mongodb'),
-      User = require('./models/user')(mongoose),
-      Story = require('./models/story')(mongoose),
+      //User = require('./models/user')(mongoose).model,
+      //Story = require('./models/story')(mongoose).model,
       session = require('./config/session')(app, mongoose.connection),
       methodOverride = require('method-override'),
       port = process.env.PORT || 3000;
@@ -21,9 +21,9 @@ app.use(methodOverride('_method'));
 require('./config/flash')(app);
 require('./config/handlebars')(app);
 
-const indexRouter = require('./routes/index')(express.Router(), Story),
-      authRouter = require('./routes/auth')(express.Router(), User),
-      storiesRouter = require('./routes/stories')(express.Router(), Story);
+const indexRouter = require('./routes/index')(express.Router()),
+      authRouter = require('./routes/auth')(express.Router()),
+      storiesRouter = require('./routes/stories')(express.Router());
 
 app.use('/', indexRouter);
 app.use('/auth', authRouter);

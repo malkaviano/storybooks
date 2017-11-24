@@ -1,9 +1,10 @@
 'use strict';
 
 const {ensureAuthenticated, ensureAuthorized} = require('../helpers/authenticate'),
-      utils = require('../helpers/utils');
+      utils = require('../helpers/utils'),
+      Story = require('./models/story')(mongoose).model;
 
-module.exports = function(router, Story) {
+module.exports = function(router) {
   router.get('/', (req, res) => {
     res.render('index/welcome');
   });

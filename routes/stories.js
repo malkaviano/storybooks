@@ -1,9 +1,10 @@
 'use strict';
 
 const {ensureAuthenticated, ensureAuthorized} = require('../helpers/authenticate'),
-      utils = require('../helpers/utils');
+      utils = require('../helpers/utils'),
+      Story = require('./models/story')(mongoose).model;
 
-module.exports = function(router, Story) {
+module.exports = function(router) {
   router.get('/', (req, res) => {
     Story.find({ status: "public" })
           .populate('author')
@@ -71,13 +72,9 @@ module.exports = function(router, Story) {
   });
 
   router.get('/:id/edit', ensureAuthenticated, (req, res) => {
-/*    
-    Story.findOne({ _id: req.params.id, author: req.session.userId })
-          .populate('author')
-*/
-    const promise = utils.findUserStory(Story, req.params.id, req.session.userId)          
+     
     utils.resolvePromise(
-      promise,
+      utils.findUserStory(Story, req.params.id, req.session.userId),
       story => {
         if(story) {
           res.render(
@@ -94,24 +91,6 @@ module.exports = function(router, Story) {
         utils.error(res, err);
       }
     );
-
-/*    
-    .then(story => {
-            if(story) {
-              res.render(
-                'stories/edit',
-                {
-                  story: story
-                }
-              );
-            } else {
-              utils.error(res, `ID: ${req.params.id} - User: ${req.session.userId}`, "User Story was not found");
-            }
-          })
-          .catch(err => {
-            utils.error(res, err);
-          });
-*/
   });
   
   router.patch('/:id', ensureAuthenticated, (req, res) => {
