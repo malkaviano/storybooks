@@ -8,18 +8,21 @@ const {ensureAuthenticated, ensureAuthorized} = require('../helpers/authenticate
 
 module.exports = (function() {
   router.get('/', (req, res) => {
-    Story.helper.findPublicStories()
-                .then(stories => {
-                  res.render(
-                    'stories/index',
-                    {
-                      stories: stories
-                    }
-                  );
-                })
-                .catch(err => {
-                  utils.error(res, err);
-                });
+
+    utils.resolvePromise(
+      Story.helper.findPublicStories(),
+      stories => {
+        res.render(
+          'stories/index',
+          {
+            stories: stories
+          }
+        );
+      },
+      err => {
+        utils.error(res, err);
+      }
+    );
   });
 
   router.get('/new', ensureAuthenticated, (req, res) => {
@@ -27,49 +30,53 @@ module.exports = (function() {
   });
 
   router.post('/', ensureAuthenticated, (req, res) => {
+
     req.body.allowComments = !!req.body.allowComments;
     req.body.author = req.session.userId;
 
-    const story = new Story.model(req.body);
+    const newStory = new Story.model(req.body);
     
-    story.save()
-          .then(
-            story => {
-              res.flash('info_msg', 'Story was created');
+    utils.resolvePromise(
+      newStory.save(),
+      story => {
+        res.flash('info_msg', 'Story was created');
 
-              res.redirect('/dashboard');
-            }
-          )
-          .catch(err => {
-            const errors = [];        
+        res.redirect('/dashboard');
+      },
+      err => {
+        const errors = [];        
 
-            for(const prop in err.errors) {
-              errors.push({ message: err.errors[prop].message });
-            }
+        for(const prop in err.errors) {
+          errors.push({ message: err.errors[prop].message });
+        }
 
-            res.render('stories/new', { errors: errors, story: story });
-          });
+        res.render('stories/new', { errors: errors, story: newStory });
+      }
+    );
+
   });
 
   router.get('/:id', (req, res) => {
 
-    Story.model.findOne({ _id: req.params.id, status: "public" })
-          .populate('author')
-          .then(story => {
-            if(story) {
-              res.render(
-                'stories/show',
-                {
-                  story: story
-                }
-              );
-            } else {
-              utils.error(res, `ID: ${req.params.id} - Public`, "Public Story was not found");
+    utils.resolvePromise(
+      Story.helper.findPublicStory(req.params.id),
+      story => {
+        if(story) {
+          res.render(
+            'stories/show',
+            {
+              story: story
             }
-          })
-          .catch(err => {
-            utils.error(res, err);
-          });
+          );
+        } else {
+          utils.error(res, `ID: ${req.params.id} - Public`, "Public Story was not found");
+        }
+      },
+      err => {
+        utils.error(res, err);
+      }
+    );
+
   });
 
   router.get('/:id/edit', ensureAuthenticated, (req, res) => {
@@ -96,39 +103,44 @@ module.exports = (function() {
   
   router.patch('/:id', ensureAuthenticated, (req, res) => {
     
-    Story.model.update(
-      { _id: req.params.id, author: req.session.userId },
-      { $set: 
-        { 
-          title: req.body.title,
-          status: req.body.status,
-          description: req.body.description,
-          allowComments: req.body.allowComments,
+    utils.resolvePromise(
+      Story.model.update(
+        { _id: req.params.id, author: req.session.userId },
+        { $set: 
+          { 
+            title: req.body.title,
+            status: req.body.status,
+            description: req.body.description,
+            allowComments: req.body.allowComments,
+          }
         }
-      }
-    )
-    .then(
+      ),
       story => {
         res.flash('info_msg', 'Story was modified');
 
         res.redirect('/dashboard');
+      },
+      err => {
+        utils.error(res, err);
       }
-    ).catch(err => {
-      utils.error(res, err);
-    });
+    );
+
   });
 
   router.delete('/:id', ensureAuthenticated, (req, res) => {
 
-    Story.model.remove({ _id: req.params.id })
-    .then(() => {
-      res.flash('info_msg', 'Story was deleted');
+    utils.resolvePromise(
+      Story.helper.removeUserStory(req.params.id, req.session.userId),
+      () => {
+        res.flash('info_msg', 'Story was deleted');
 
-      res.redirect('/dashboard')
-    })
-    .catch(err => {
-      utils.error(res, err);
-    });          
+        res.redirect('/dashboard')
+      },
+      err => {
+        utils.error(res, err);
+      }
+    );          
+
   });
 
   return router;
