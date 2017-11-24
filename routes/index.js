@@ -2,7 +2,7 @@
 
 const {ensureAuthenticated, ensureAuthorized} = require('../helpers/authenticate'),
       utils = require('../helpers/utils'),
-      Story = require('./models/story').model;
+      Story = require('../models/story').model;
 
 module.exports = function(router) {
   router.get('/', (req, res) => {

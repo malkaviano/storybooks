@@ -2,7 +2,7 @@
 
 const {url, oauth2Client, plus} = require('../config/google_oauth2'),
       defaults = require('../config/defaults.json'),
-      User = require('./models/user').model;
+      User = require('../models/user').model;
 
 module.exports = function(router) {
   router.get('/login', function(req, res) {
