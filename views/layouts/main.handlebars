@@ -35,14 +35,15 @@
     
       $('select').material_select();
     
-      CKEDITOR.replace('description');
+      CKEDITOR.replace('description');      
+    });
 
-      $('body').on('click', '.alert .close', function() {
+    $('body').on('click', '.alert .close', function() {
         alert('Click');
-          $(this).parent().fadeOut(300, function() {
-              $(this).remove();
-          });
-      });
+        
+        $(this).parent().fadeOut(300, function() {
+            $(this).remove();
+        });
     });
   </script>
 </body>
