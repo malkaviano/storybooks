@@ -76,7 +76,7 @@ module.exports = (function() {
   router.get('/:id/edit', ensureAuthenticated, (req, res) => {
      
     utils.resolvePromise(
-      utils.findUserStory(Story, req.params.id, req.session.userId),
+      Story.findUserStory(req.params.id, req.session.userId),
       story => {
         if(story) {
           res.render(

@@ -34,11 +34,7 @@ app.set('view engine', viewEngine.name);
 for(const name in routes) {
       app.use(routes[name].path, routes[name].router);
 }
-/*
-app.use('/', routes.indexRouter);
-app.use('/auth', routes.authRouter);
-app.use('/stories', routes.storiesRouter);
-*/
+
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
