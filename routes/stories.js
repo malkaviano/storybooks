@@ -43,10 +43,10 @@ module.exports = function(router, Story) {
       .catch(err => {
         const errors = [];        
 
-        for(const item in err.errors) {
-          console.log(item);
+        for(const prop in err.errors) {
+          //console.log(item);
 
-          errors.push({ message: item.message });
+          errors.push({ message: err.errors[prop].message });
         }
         //err.errors.forEach((item, index) => errors.push(item));
         
