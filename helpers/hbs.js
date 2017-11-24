@@ -1,7 +1,8 @@
 'use strict';
 
 const striptags = require('striptags'),
-      moment = require('moment');
+      moment = require('moment'),
+      htmlToText = require('html-to-text');
 
 module.exports = {
   truncate: function(str, len) {
@@ -26,5 +27,8 @@ module.exports = {
                     str,
                     `${str} selected="selected"`
                   );
-  }
+  },
+  htmlToText: html => htmlToText.fromString(html, {
+    wordwrap: false
+  })
 };

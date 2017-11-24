@@ -6,7 +6,11 @@ const {ensureAuthenticated, ensureAuthorized} = require('../helpers/authenticate
       express = require('express'),
       router = express.Router();
 
-module.exports = (function() {
+function registerRoutes() {
+  router.get('/new', ensureAuthenticated, (req, res) => {
+    res.render('stories/new');
+  });
+  
   router.get('/', (req, res) => {
 
     utils.resolvePromise(
@@ -23,37 +27,6 @@ module.exports = (function() {
         utils.error(res, err);
       }
     );
-  });
-
-  router.get('/new', ensureAuthenticated, (req, res) => {
-    res.render('stories/new');
-  });
-
-  router.post('/', ensureAuthenticated, (req, res) => {
-
-    req.body.allowComments = !!req.body.allowComments;
-    req.body.author = req.session.userId;
-
-    const newStory = new Story.model(req.body);
-    
-    utils.resolvePromise(
-      newStory.save(),
-      story => {
-        res.flash('info_msg', 'Story was created');
-
-        res.redirect('/dashboard');
-      },
-      err => {
-        const errors = [];        
-
-        for(const prop in err.errors) {
-          errors.push({ message: err.errors[prop].message });
-        }
-
-        res.render('stories/new', { errors: errors, story: newStory });
-      }
-    );
-
   });
 
   router.get('/:id', (req, res) => {
@@ -80,7 +53,7 @@ module.exports = (function() {
   });
 
   router.get('/:id/edit', ensureAuthenticated, (req, res) => {
-     
+      
     utils.resolvePromise(
       Story.helper.findUserStory(req.params.id, req.session.userId),
       story => {
@@ -101,6 +74,34 @@ module.exports = (function() {
     );
   });
   
+  router.post('/', ensureAuthenticated, (req, res) => {
+    
+      req.body.allowComments = !!req.body.allowComments;
+      req.body.author = req.session.userId;
+  
+      const newStory = new Story.model(req.body);
+      
+      utils.resolvePromise(
+        newStory.save(),
+        story => {
+          res.flash('info_msg', 'Story was created');
+  
+          res.redirect('/dashboard');
+        },
+        err => {
+          const errors = [];        
+  
+          for(const prop in err.errors) {
+            errors.push({ message: err.errors[prop].message });
+          }
+  
+          res.render('stories/new', { errors: errors, story: newStory });
+        }
+      );
+  
+    }
+  );
+
   router.patch('/:id', ensureAuthenticated, (req, res) => {
     
     req.body.allowComments = !!req.body.allowComments;
@@ -155,4 +156,6 @@ module.exports = (function() {
   });
 
   return router;
-})();
+}
+
+module.exports = registerRoutes();

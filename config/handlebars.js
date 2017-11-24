@@ -1,7 +1,7 @@
 'use strict';
 
 const exphbs = require('express-handlebars'),
-      {truncate, striptags, formatDate, selected} = require('../helpers/hbs');
+      {truncate, striptags, formatDate, selected, htmlToText} = require('../helpers/hbs');
 
 module.exports = {
   config: function() {
@@ -10,7 +10,8 @@ module.exports = {
       truncate: truncate,
       striptags: striptags,
       formatDate: formatDate,
-      selected: selected
+      selected: selected,
+      htmlToText: htmlToText
       },
       defaultLayout: 'main' 
     });
