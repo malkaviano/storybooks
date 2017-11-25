@@ -4,7 +4,8 @@ const {url, oauth2Client, plus} = require('../config/google_oauth2'),
       defaults = require('../config/defaults.json'),
       User = require('../models/user').model,
       express = require('express'),
-      router = express.Router();
+      router = express.Router(),
+      utils = require('../helpers/utils');
 
 module.exports = (function() {
   router.get('/login', function(req, res) {
@@ -14,9 +15,7 @@ module.exports = (function() {
   router.get('/logout', function(req, res) {
     req.session.destroy(function(err) {
       if(err) {
-        console.log(err);
-
-        throw err;
+        utils.error(res, err, 'Error logging out');
       } else {
         res.redirect(defaults.logoutRedirect);
       }
@@ -28,7 +27,7 @@ module.exports = (function() {
 
     oauth2Client.getToken(code, function (err, tokens) {
       if(err) {
-        throw err;
+        utils.error(res, err, 'Error logging in');
       }
 
       // Now tokens contains an access_token and an optional refresh_token. Save them.
@@ -41,9 +40,7 @@ module.exports = (function() {
         },
         function (err, profile) {
           if(err) {
-            console.log(err);
-
-            throw err;
+            utils.error(res, err, 'Error logging in');
           }
 
           /*
