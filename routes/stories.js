@@ -14,7 +14,7 @@ function registerRoutes() {
   });
 
   router.get('/my', utils.ensureAuthenticated, (req, res) => {
-    res.redirect(`stories/user/${req.session.userId}`);
+    res.redirect(`/stories/user/${req.session.userId}`);
   });
   
   router.get('/', (req, res) => {
