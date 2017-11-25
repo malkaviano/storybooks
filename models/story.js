@@ -3,9 +3,9 @@
 const mongoose = require('../config/mongodb'),
       Schema = mongoose.Schema;
 
-function schema() {
-  const Story = mongoose.model(
-    'story',
+function model() {
+  
+  const storySchema = 
     new Schema(
       {
         title: {
@@ -60,19 +60,17 @@ function schema() {
           default: Date.now
         }
       }
-    ),
-    'stories'
-  );
+    );
 
-  Story.statics.findUserStory = function(id, userId) {
+  storySchema.statics.findUserStory = function(id, userId) {
     return model.findOne({ _id: id, author: userId }).populate('author');
   }
 
-  return Story;
+  return mongoose.model('story', storySchema, 'stories');
 };
 
 module.exports = {
-  model: schema(),
+  model: model(),
   helper: {
     findUserStory: (id, userId) => model.findOne({ _id: id, author: userId }).populate('author'),
     findPublicStories: () => model.find({ status: "public" }).populate('author'),
