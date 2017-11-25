@@ -6,7 +6,7 @@ const utils = require('../helpers/utils'),
       router = express.Router({mergeParams: true});
 
 function registerRoutes() {
-  router.post('/new', utils.ensureAuthenticated, (req, res) => {
+  router.post('/', utils.ensureAuthenticated, (req, res) => {
 
     utils.resolvePromise(
       Story.findPublicOrOwnStory(req.params.storyId),
@@ -26,7 +26,13 @@ function registerRoutes() {
             res.redirect(`/stories/${req.params.storyId}`);
           },
           err => {
-            utils.error(res, err);
+            const errors = [];        
+            
+            for(const prop in err.errors) {
+              errors.push({ message: err.errors[prop].message });
+            }
+    
+            res.render('stories/show', { errors: errors, story: story });
           }
         );
       },

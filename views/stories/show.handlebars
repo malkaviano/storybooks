@@ -11,17 +11,17 @@
       <div class="card-content">
         <!--<span class="card-title">Comments</span>-->
         {{#if session.username}}
-          <form action="/stories/{{story._id}}/comments/new" method="post">
-            <div class="input-field">
-              <textarea name="commentText" class="materialize-textarea"></textarea>
-              <label for="commentText">Add comment</label>
-              <input type="submit" value="Submit" class="btn">
-            </div>
-          </form>
+        <form action="/stories/{{story._id}}/comments" method="post">
+          <div class="input-field">
+            <textarea name="commentText" class="materialize-textarea"></textarea>
+            <label for="commentText">Add comment</label>
+            <input type="submit" value="Submit" class="btn">
+          </div>
+        </form>
         {{else}}
-          <p>
-            Please <a href="/auth/login?return=/stories/{{story._id}}">Log in</a> to leave a comment
-          </p>
+        <p>
+          Please <a href="/auth/login?return=/stories/{{story._id}}">Log in</a> to leave a comment
+        </p>
         {{/if}}
       </div>
     </div>
