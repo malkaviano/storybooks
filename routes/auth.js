@@ -48,7 +48,7 @@ function register() {
                 User.findOne({ googleId: profile.id }),
                 user => {
                   if(user) {
-                    utils.setSession(req.session, user);
+                    utils.setUserSession(req.session, user);
 
                     res.redirect(req.session.requestedUrl || defaults.loginRedirect);
                   } else {
@@ -62,7 +62,7 @@ function register() {
                         }
                       ).save(),
                       newUser => {
-                        utils.setSession(req.session, newUser);
+                        utils.setUserSession(req.session, newUser);
                         
                         res.redirect(req.session.requestedUrl || defaults.loginRedirect);
                       },
