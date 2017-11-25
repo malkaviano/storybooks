@@ -7,7 +7,8 @@ module.exports = {
     
     return mongoose.model('user', new mongoose.Schema({
       name: {
-        type: String
+        type: String,
+        required: true
       },
       email: {
         type: String,

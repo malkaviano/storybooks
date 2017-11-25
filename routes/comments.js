@@ -7,7 +7,31 @@ const utils = require('../helpers/utils'),
 
 function registerRoutes() {
   router.post('/new', utils.ensureAuthenticated, (req, res) => {
-    res.redirect(`/stories/${req.params.storyId}`);
+
+    utils.resolvePromise(
+      Story.findPublicOrOwnStory(req.params.storyId),
+      story => {
+        const newComment = {
+          commentText: req.body.commentText,
+          commentUser: req.session.userId
+        }
+        utils.resolvePromise(
+          story.save(),
+          saved => {
+            res.flash('info_msg', 'Comment saved');
+            
+            res.redirect(`/stories/${req.params.storyId}`);
+          },
+          err => {
+            utils.error(res, err);
+          }
+        );
+      },
+      err => {
+        utils.error(res, err);
+      }
+    );
+
   });
 
   return router;

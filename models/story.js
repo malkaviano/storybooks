@@ -64,8 +64,7 @@ function model() {
 
   storySchema.statics.findUserStory = function(id, userId) {
     return this.findOne({ _id: id, author: userId })
-                .populate('author')
-                .populate('comments.commentUser');
+                .populate('author');
   };
 
   storySchema.statics.findPublicStories = function() {
@@ -74,7 +73,8 @@ function model() {
 
   storySchema.statics.findPublicOrOwnStory = function(id, userId) {
     return this.findOne({ $and: [{ _id: id }, { $or: [{ status: "public" }, { author: userId }]}]})
-                .populate('author');
+                .populate('author')
+                .populate('comments.commentUser');
   };
     
   storySchema.statics.removeUserStory = function(id, userId) {
