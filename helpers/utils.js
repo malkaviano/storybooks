@@ -1,5 +1,7 @@
 'use strict';
 
+const defaults = require('../config/defaults.json');
+
 function logErrorAndRedirect(res, log, msg = 'Invalid Operation', redirectUrl = '/') {
   console.log(log);
   
@@ -21,16 +23,12 @@ function fillObject(obj, values) {
 module.exports = {
   ensureAuthenticated: function(req, res, next) {
     if (req.session.username) {
-      console.log(req.session.username);
-
       return next();
-    } else {
-      req.session.requestedUrl = req.originalUrl;
+    }
+    
+    req.session.requestedUrl = req.originalUrl;
 
-      console.log(req.session.requestedUrl);
-
-      res.redirect(defaults.loginUrl); 
-    }       
+    res.redirect(defaults.loginUrl);       
   },
   error: logErrorAndRedirect,
   resolvePromise: (promise, resolve, error) => {
