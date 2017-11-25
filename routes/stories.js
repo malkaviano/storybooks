@@ -1,7 +1,6 @@
 'use strict';
 
-const {ensureAuthenticated, ensureAuthorized} = require('../helpers/authenticate'),
-      utils = require('../helpers/utils'),
+const utils = require('../helpers/utils'),
       Story = require('../models/story'),
       express = require('express'),
       router = express.Router();
