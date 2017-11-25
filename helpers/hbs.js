@@ -29,5 +29,10 @@ module.exports = {
   htmlToText: html => htmlToText.fromString(html, {
     wordwrap: false
   }),
-  showEditIcon: (userId, authorId) => userId === authorId
+  showEditIcon: (userId, authorId) => {
+    console.log(userId);
+    console.log(authorId);
+    console.log(userId === authorId);
+    userId === authorId;
+  }
 };
