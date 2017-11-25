@@ -1,8 +1,10 @@
 'use strict';
 
+const mongoose = require('../config/mongodb'),
+      Schema = mongoose.Schema;
+
 function schema() {
-  const Schema = mongoose.Schema,
-        schema = mongoose.model(
+  const Story = mongoose.model(
     'story',
     new Schema(
       {
@@ -62,18 +64,15 @@ function schema() {
     'stories'
   );
 
-  schema.methods.findUserStory = function(id, userId) {
+  Story.methods.findUserStory = function(id, userId) {
     return model.findOne({ _id: id, author: userId }).populate('author');
   }
-  
-  return schema;
+
+  return Story;
 };
 
-const mongoose = require('../config/mongodb'),
-      model = schema();
-
 module.exports = {
-  model: model,
+  model: schema(),
   helper: {
     findUserStory: (id, userId) => model.findOne({ _id: id, author: userId }).populate('author'),
     findPublicStories: () => model.find({ status: "public" }).populate('author'),
