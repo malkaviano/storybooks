@@ -6,7 +6,10 @@ const utils = require('../helpers/utils'),
       router = express.Router({mergeParams: true});
 
 function registerRoutes() {
-  
+  router.post('/new', utils.ensureAuthenticated, (req, res) => {
+    res.redirect(`/stories/${req.params.storyId}`)
+  });
+
   return router;
 }
 
