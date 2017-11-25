@@ -22,7 +22,10 @@
         <h5>{{title}}</h5>
         <p class="story-text">{{truncate (htmlToText description) 150}}</p>
         <br>
-        {{> _chip }}
+        <div class="chip">
+          <img src="{{author.image}}" alt="">
+          <a href="/stories/user/{{author.id}}">{{author.name}}</a>
+        </div>
       </div>
       <div class="card-action center-align">
         <a class="btn grey" href="/stories/{{id}}">READ MORE</a>
