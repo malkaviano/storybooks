@@ -64,7 +64,7 @@ function schema() {
     'stories'
   );
 
-  Story.methods.findUserStory = function(id, userId) {
+  Story.statics.findUserStory = function(id, userId) {
     return model.findOne({ _id: id, author: userId }).populate('author');
   }
 
