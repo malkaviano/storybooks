@@ -12,7 +12,8 @@ module.exports = {
           formatDate: hbsHelper.formatDate,
           selected: hbsHelper.selected,
           htmlToText: hbsHelper.htmlToText,
-          showEditIcon: hbsHelper.showEditIcon
+          showEditIcon: hbsHelper.showEditIcon,
+          setUserSession: hbsHelper.setUserSession
         },
         defaultLayout: 'main' 
       }

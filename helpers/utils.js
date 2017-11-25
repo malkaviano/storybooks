@@ -35,5 +35,10 @@ module.exports = {
     promise.then(resolve)
             .catch(error);
   },
-  fillObject: fillObject
+  fillObject: fillObject,
+  setUserSession: (session, user) => {
+    session.userId = user.id;
+    session.username = user.name;
+    session.email = user.email;
+  }
 }
