@@ -38,6 +38,14 @@ function registerRoutes() {
       Story.findPublicOrOwnStory(req.params.id, req.session.userId),
       story => {
         if(story) {
+          story.comments.sort((c1, c2) => {
+            if(c1.commentDate > c2.commentDate) return -1;
+
+            if(c1.commentDate < c2.commentDate) return 1;
+
+            return 0;
+          });
+
           res.render(
             'stories/show',
             {
@@ -46,7 +54,7 @@ function registerRoutes() {
             }
           );
         } else {
-          utils.error(res, `ID: ${req.params.id} - Public`, "Public Story was not found");
+          utils.error(res, `ID: ${req.params.id} - Public`, "Story was not found");
         }
       },
       err => {
