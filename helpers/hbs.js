@@ -32,7 +32,7 @@ module.exports = {
   showEditIcon: (userId, authorId) => {
     console.log(userId);
     console.log(authorId);
-    console.log(userId === authorId);
+    console.log(userId.trim() === authorId.trim());
     userId === authorId;
   }
 };
