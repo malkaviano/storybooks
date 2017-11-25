@@ -81,6 +81,12 @@ function model() {
     return this.remove({ _id: id, author: userId });
   };
 
+  storySchema.statics.findUserStories = function(userId) {
+    return this.find({ $and: [{ author: userId }, { $or: [{ status: "public" }, { author: userId }]}]})
+                .populate('author')
+                .sort({ date: 'desc' });
+  };
+
   return mongoose.model('story', storySchema, 'stories');
 };
 

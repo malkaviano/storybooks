@@ -87,6 +87,23 @@ function registerRoutes() {
 
   });
   
+  router.get('/user/:userId', utils.ensureAuthenticated, (res, req) => {
+    utils.resolvePromise(
+      Story.findUserStories(req.session.userId),
+      stories => {
+        res.render(
+          'stories/index',
+          {
+            stories: stories
+          }
+        );
+      },
+      err => {
+        utils.error(res, err);
+      }
+    );
+  });
+
   router.post('/', utils.ensureAuthenticated, (req, res) => {
     
       req.body.allowComments = !!req.body.allowComments;
