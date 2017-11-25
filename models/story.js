@@ -82,7 +82,7 @@ function model() {
   };
 
   storySchema.statics.findUserStories = function(userId) {
-    return this.find({ $and: [{ author: userId }, { $or: [{ status: "public" }, { author: userId }]}]})
+    return this.find({ author: userId })
                 .populate('author')
                 .sort({ date: 'desc' });
   };
