@@ -15,7 +15,7 @@ function schema() {
           trim: true
         },
         status: {
-          type: { type: [String], index: true },
+          type: { type: String, index: true },
           default: 'public'
         },
         description: {
@@ -48,7 +48,7 @@ function schema() {
           }
         }],
         author: {
-          type: { type: [Schema.Types.ObjectId], index: true },
+          type: { type: Schema.Types.ObjectId, index: true },
           ref: 'user',
           required: true
         },
