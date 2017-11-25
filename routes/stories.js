@@ -38,7 +38,7 @@ function registerRoutes() {
             'stories/show',
             {
               story: story,
-              back: (`/${req.query.return}` || "/stories")
+              back: (req.query.return || "stories")
             }
           );
         } else {
