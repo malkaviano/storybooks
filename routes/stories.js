@@ -7,7 +7,7 @@ const {ensureAuthenticated, ensureAuthorized} = require('../helpers/authenticate
       router = express.Router();
 
 function registerRoutes() {
-  router.get('/new', ensureAuthenticated, (req, res) => {
+  router.get('/new', utils.ensureAuthenticated, (req, res) => {
     res.render('stories/new');
   });
   
@@ -52,7 +52,7 @@ function registerRoutes() {
 
   });
 
-  router.get('/:id/edit', ensureAuthenticated, (req, res) => {
+  router.get('/:id/edit', utils.ensureAuthenticated, (req, res) => {
       
     utils.resolvePromise(
       Story.helper.findUserStory(req.params.id, req.session.userId),
@@ -74,7 +74,7 @@ function registerRoutes() {
     );
   });
   
-  router.post('/', ensureAuthenticated, (req, res) => {
+  router.post('/', utils.ensureAuthenticated, (req, res) => {
     
       req.body.allowComments = !!req.body.allowComments;
       req.body.author = req.session.userId;
@@ -102,7 +102,7 @@ function registerRoutes() {
     }
   );
 
-  router.patch('/:id', ensureAuthenticated, (req, res) => {
+  router.patch('/:id', utils.ensureAuthenticated, (req, res) => {
     
     req.body.allowComments = !!req.body.allowComments;
 
@@ -136,7 +136,7 @@ function registerRoutes() {
 
   });
 
-  router.delete('/:id', ensureAuthenticated, (req, res) => {
+  router.delete('/:id', utils.ensureAuthenticated, (req, res) => {
 
     utils.resolvePromise(
       Story.helper.removeUserStory(req.params.id, req.session.userId),
