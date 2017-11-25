@@ -63,7 +63,7 @@ function model() {
     );
 
   storySchema.statics.findUserStory = function(id, userId) {
-    return model.findOne({ _id: id, author: userId }).populate('author');
+    return this.findOne({ _id: id, author: userId }).populate('author');
   }
 
   return mongoose.model('story', storySchema, 'stories');
