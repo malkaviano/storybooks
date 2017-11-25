@@ -25,8 +25,6 @@ module.exports = {
     if (req.session.username) {
       return next();
     }
-    
-    req.session.requestedUrl = req.originalUrl;
 
     res.redirect(defaults.loginUrl);       
   },

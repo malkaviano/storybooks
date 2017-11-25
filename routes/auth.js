@@ -9,6 +9,9 @@ const {url, oauth2Client, plus} = require('../config/google_oauth2'),
 
 module.exports = (function() {
   router.get('/login', function(req, res) {
+
+    req.session.requestedUrl = req.originalUrl;
+    
     res.redirect(url);
   });
 
