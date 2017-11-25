@@ -24,7 +24,7 @@ function model() {
           type: String,
           required: true,
           minlength: 50,
-          maxlength: 1000,
+          maxlength: 10000,
           trim: true
         },
         allowComments: {
