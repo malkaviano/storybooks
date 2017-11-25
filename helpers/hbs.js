@@ -28,5 +28,6 @@ module.exports = {
   },
   htmlToText: html => htmlToText.fromString(html, {
     wordwrap: false
-  })
+  }),
+  showEditIcon: (userId, authorId) => userId === authorId
 };
