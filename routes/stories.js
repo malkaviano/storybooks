@@ -55,7 +55,7 @@ function registerRoutes() {
   router.get('/:id/edit', utils.ensureAuthenticated, (req, res) => {
       
     utils.resolvePromise(
-      Story.helper.findUserStory(req.params.id, req.session.userId),
+      Story.model.findUserStory(req.params.id, req.session.userId),
       story => {
         if(story) {
           res.render(

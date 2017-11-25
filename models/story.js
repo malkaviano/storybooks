@@ -1,9 +1,8 @@
 'use strict';
 
 function schema() {
-  const Schema = mongoose.Schema;
-
-  return mongoose.model(
+  const Schema = mongoose.Schema,
+        schema = mongoose.model(
     'story',
     new Schema(
       {
@@ -62,6 +61,12 @@ function schema() {
     ),
     'stories'
   );
+
+  schema.methods.findUserStory = function(id, userId) {
+    return model.findOne({ _id: id, author: userId }).populate('author');
+  }
+  
+  return schema;
 };
 
 const mongoose = require('../config/mongodb'),
