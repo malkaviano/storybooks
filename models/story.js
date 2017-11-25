@@ -68,7 +68,7 @@ function model() {
   };
 
   storySchema.statics.findPublicStories = function() {
-    return this.find({ status: "public" }).populate('author');
+    return this.find({ status: "public" }).populate('author').sort({ date: 'desc' });
   };
 
   storySchema.statics.findPublicOrOwnStory = function(id, userId) {

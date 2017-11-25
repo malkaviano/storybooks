@@ -11,7 +11,7 @@
       <div class="card-content">
         <!--<span class="card-title">Comments</span>-->
         {{#if session.username}}
-        <form action="/stories/{{story._id}}/comments" method="post">
+        <form action="/stories/{{story.id}}/comments" method="post">
           <div class="input-field">
             <textarea name="commentText" class="materialize-textarea"></textarea>
             <label for="commentText">Add comment</label>
@@ -20,7 +20,7 @@
         </form>
         {{else}}
         <p>
-          Please <a href="/auth/login?return=/stories/{{story._id}}">Log in</a> to leave a comment
+          Please <a href="/auth/login?return=/stories/{{story.id}}">Log in</a> to leave a comment
         </p>
         {{/if}}
       </div>
@@ -47,7 +47,7 @@
         <img src="{{story.author.image}}" alt="Avatar" class="circle responsive-img">
       </div>
       <div class="card-action">
-        <a href="/stories/user/{{story.author._id}}">More From {{story.author.name}}</a>
+        <a href="/stories/user/{{story.author.id}}">More From {{story.author.name}}</a>
       </div>
     </div>
     <a class="btn waves-effect waves-light" href="/{{back}}">Back</a>

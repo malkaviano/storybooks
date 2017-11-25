@@ -1,5 +1,10 @@
 <h1>Welcome {{session.username}}</h1>
-<h4>Your Stories</h4>
+<h4>
+  Your Stories 
+  <a class="btn-floating btn-large waves-effect waves-light red" href="/stories/new">
+    <i class="fa fa-plus"></i>
+  </a>
+</h4>
 {{#if stories}}
 <table class="striped">
   <thead>
@@ -7,23 +12,20 @@
       <th>Title</th>
       <th>Date</th>
       <th>Status</th>
-      <th>
-        <a class="btn-floating btn-large waves-effect waves-light red" href="/stories/new">
-          <i class="fa fa-plus"></i>
-        </a>
+      <th>        
       </th>
     </tr>
   </thead>
   <tbody>
     {{#each stories}}
     <tr>
-      <td><a href="/stories/{{_id}}?return=dashboard">{{title}}</a></td>
+      <td><a href="/stories/{{id}}?return=dashboard">{{title}}</a></td>
       <td>{{formatDate date 'MMMM Do YYYY'}}</td>
       <td><span class="dash-status">{{status}}</span></td>
       <td>
-        <a href="/stories/{{_id}}/edit" class="btn left-align"><i class="fa fa-pencil"></i> Edit</a>
+        <a href="/stories/{{id}}/edit" class="btn left-align"><i class="fa fa-pencil"></i> Edit</a>
 
-        <form action="/stories/{{_id}}?_method=DELETE" method="post" id="delete-form">
+        <form action="/stories/{{id}}?_method=DELETE" method="post" id="delete-form">
           <button class="btn red" type="submit"><i class="fa fa-remove"></i> Delete</button>
         </form>
       </td>
