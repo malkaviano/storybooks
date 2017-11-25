@@ -105,7 +105,7 @@ function registerRoutes() {
     );
   });
 
-  router.get('/my', , utils.ensureAuthenticated, (req, res) => {
+  router.get('/my', utils.ensureAuthenticated, (req, res) => {
     res.redirect(`stories/user/${req.session.userId}`);
   });
 
