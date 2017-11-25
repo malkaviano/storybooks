@@ -87,9 +87,9 @@ function registerRoutes() {
 
   });
   
-  router.get('/user/:userId', utils.ensureAuthenticated, (res, req) => {
+  router.get('/user/:id', utils.ensureAuthenticated, (res, req) => {
     utils.resolvePromise(
-      Story.findUserStories(req.params.userId),
+      Story.findUserStories(req.params.id),
       stories => {
         res.render(
           'stories/index',
