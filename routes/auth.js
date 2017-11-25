@@ -47,13 +47,7 @@ function register() {
               utils.resolvePromise(
                 User.findOne({ googleId: profile.id }),
                 user => {
-                  if(user) {
-                    req.session.userId = user._id;
-                    req.session.username = user.name;
-                    req.session.email = user.email;
-                    
-                    res.redirect(req.session.requestedUrl || defaults.loginRedirect);
-                  } else {
+                  if(!user) {
                     utils.resolvePromise(
                       new User(
                         {
@@ -70,7 +64,13 @@ function register() {
                         utils.error(res, err, 'DB Error');
                       }
                     );
-                  }                
+                  }
+                  
+                  req.session.userId = user._id;
+                  req.session.username = user.name;
+                  req.session.email = user.email;
+                  
+                  res.redirect(req.session.requestedUrl || defaults.loginRedirect);             
                 },
                 err => {
                   utils.error(res, err, 'DB Error');
