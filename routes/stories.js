@@ -13,7 +13,7 @@ function registerRoutes() {
   router.get('/', (req, res) => {
 
     utils.resolvePromise(
-      Story.helper.findPublicStories(),
+      Story.findPublicStories(),
       stories => {
         res.render(
           'stories/index',
@@ -31,7 +31,7 @@ function registerRoutes() {
   router.get('/:id', (req, res) => {
 
     utils.resolvePromise(
-      Story.helper.findPublicOrOwnStory(req.params.id, req.session.userId),
+      Story.findPublicOrOwnStory(req.params.id, req.session.userId),
       story => {
         if(story) {
           res.render(
@@ -55,7 +55,7 @@ function registerRoutes() {
   router.get('/:id/edit', utils.ensureAuthenticated, (req, res) => {
       
     utils.resolvePromise(
-      Story.model.findUserStory(req.params.id, req.session.userId),
+      Story.findUserStory(req.params.id, req.session.userId),
       story => {
         if(story) {
           res.render(
@@ -79,7 +79,7 @@ function registerRoutes() {
       req.body.allowComments = !!req.body.allowComments;
       req.body.author = req.session.userId;
   
-      const newStory = new Story.model(req.body);
+      const newStory = new Story(req.body);
       
       utils.resolvePromise(
         newStory.save(),
@@ -107,7 +107,7 @@ function registerRoutes() {
     req.body.allowComments = !!req.body.allowComments;
 
     utils.resolvePromise(
-      Story.helper.findUserStory(req.params.id, req.session.userId),
+      Story.findUserStory(req.params.id, req.session.userId),
       story => {
         utils.fillObject(story, req.body);
 
@@ -139,7 +139,7 @@ function registerRoutes() {
   router.delete('/:id', utils.ensureAuthenticated, (req, res) => {
 
     utils.resolvePromise(
-      Story.helper.removeUserStory(req.params.id, req.session.userId),
+      Story.removeUserStory(req.params.id, req.session.userId),
       () => {
         res.flash('info_msg', 'Story was deleted');
 

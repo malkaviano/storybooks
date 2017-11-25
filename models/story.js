@@ -64,19 +64,26 @@ function model() {
 
   storySchema.statics.findUserStory = function(id, userId) {
     return this.findOne({ _id: id, author: userId }).populate('author');
-  }
+  };
+
+  storySchema.statics.findUserStory = function(id, userId) {
+    return this.findOne({ _id: id, author: userId }).populate('author');
+  };
+
+  storySchema.statics.findPublicStories = function() {
+    return this.find({ status: "public" }).populate('author');
+  };
+
+  storySchema.statics.findPublicOrOwnStory = function(id, userId) {
+    return this.findOne({ $and: [{ _id: id }, { $or: [{ status: "public" }, { author: userId }]}]})
+                .populate('author');
+  };
+    
+  storySchema.statics.removeUserStory = function(id, userId) {
+    return this.remove({ _id: id, author: userId });
+  };
 
   return mongoose.model('story', storySchema, 'stories');
 };
 
-module.exports = {
-  model: model(),
-  helper: {
-    findUserStory: (id, userId) => model.findOne({ _id: id, author: userId }).populate('author'),
-    findPublicStories: () => model.find({ status: "public" }).populate('author'),
-    findPublicOrOwnStory: (id, userId) => 
-      model.findOne({ $and: [{ _id: id }, { $or: [{ status: "public" }, { author: userId }]}]})
-            .populate('author'),
-    removeUserStory: (id, userId) => model.remove({ _id: id, author: userId })
-  }
-};
+module.exports = model();
