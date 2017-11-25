@@ -32,7 +32,7 @@ function registerRoutes() {
   router.get('/:id', (req, res) => {
 
     utils.resolvePromise(
-      Story.helper.findPublicStory(req.params.id),
+      Story.helper.findPublicOrOwnStory(req.params.id, req.session.userId),
       story => {
         if(story) {
           res.render(
@@ -109,15 +109,8 @@ function registerRoutes() {
     utils.resolvePromise(
       Story.helper.findUserStory(req.params.id, req.session.userId),
       story => {
-        console.log(req.body);
-/*        
-        story.title = req.body.title,
-        story.status = req.body.status,
-        story.description = req.body.description,
-        story.allowComments = req.body.allowComments,
-*/
         utils.fillObject(story, req.body);
-        
+
         utils.resolvePromise(
           story.save(),
           saved => {

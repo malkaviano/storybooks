@@ -70,7 +70,9 @@ module.exports = {
   helper: {
     findUserStory: (id, userId) => model.findOne({ _id: id, author: userId }).populate('author'),
     findPublicStories: () => model.find({ status: "public" }).populate('author'),
-    findPublicStory: id => model.findOne({ _id: id, status: "public" }).populate('author'),
+    findPublicOrOwnStory: (id, userId) => 
+      model.findOne({ $and: [{ _id: id }, { $or: [{ status: "public" }, { author: userId }]}]})
+            .populate('author'),
     removeUserStory: (id, userId) => model.remove({ _id: id, author: userId })
   }
 };
