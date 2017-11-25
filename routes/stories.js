@@ -88,6 +88,7 @@ function registerRoutes() {
   });
   
   router.get('/user/:id', utils.ensureAuthenticated, (res, req) => {
+    console.log(req.params);
     utils.resolvePromise(
       Story.findUserStories(req.params.id),
       stories => {
