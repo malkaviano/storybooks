@@ -12,6 +12,10 @@ function registerRoutes() {
   router.get('/new', utils.ensureAuthenticated, (req, res) => {
     res.render('stories/new');
   });
+
+  router.get('/my', utils.ensureAuthenticated, (req, res) => {
+    res.redirect(`stories/user/${req.session.userId}`);
+  });
   
   router.get('/', (req, res) => {
 
@@ -103,10 +107,6 @@ function registerRoutes() {
         utils.error(res, err);
       }
     );
-  });
-
-  router.get('/my', utils.ensureAuthenticated, (req, res) => {
-    res.redirect(`stories/user/${req.session.userId}`);
   });
 
   router.post('/', utils.ensureAuthenticated, (req, res) => {
