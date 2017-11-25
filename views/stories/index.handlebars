@@ -23,7 +23,9 @@
         <p class="story-text">{{truncate (htmlToText description) 150}}</p>
         <br>
         <div class="chip">
-          <img src="{{author.image}}" alt="">{{author.name}}
+          <a href="/stories/user/{{author.id}}">
+            <img src="{{author.image}}" alt="">{{author.name}}
+          </a>
         </div>
       </div>
       <div class="card-action center-align">
