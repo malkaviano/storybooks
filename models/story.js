@@ -63,11 +63,9 @@ function model() {
     );
 
   storySchema.statics.findUserStory = function(id, userId) {
-    return this.findOne({ _id: id, author: userId }).populate('author');
-  };
-
-  storySchema.statics.findUserStory = function(id, userId) {
-    return this.findOne({ _id: id, author: userId }).populate('author');
+    return this.findOne({ _id: id, author: userId })
+                .populate('author')
+                .populate('comments.commentUser');
   };
 
   storySchema.statics.findPublicStories = function() {

@@ -3,7 +3,10 @@
 const utils = require('../helpers/utils'),
       Story = require('../models/story'),
       express = require('express'),
-      router = express.Router();
+      router = express.Router(),
+      commentsRouter = require('./comments');
+
+router.use('/:storyId/comments', commentsRouter);
 
 function registerRoutes() {
   router.get('/new', utils.ensureAuthenticated, (req, res) => {
@@ -26,6 +29,7 @@ function registerRoutes() {
         utils.error(res, err);
       }
     );
+
   });
 
   router.get('/:id', (req, res) => {
@@ -72,6 +76,7 @@ function registerRoutes() {
         utils.error(res, err);
       }
     );
+
   });
   
   router.post('/', utils.ensureAuthenticated, (req, res) => {
@@ -99,8 +104,7 @@ function registerRoutes() {
         }
       );
   
-    }
-  );
+  });
 
   router.patch('/:id', utils.ensureAuthenticated, (req, res) => {
     
