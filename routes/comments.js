@@ -7,7 +7,7 @@ const utils = require('../helpers/utils'),
 
 function registerRoutes() {
   router.post('/new', utils.ensureAuthenticated, (req, res) => {
-    res.redirect(`/stories/${req.params.storyId}`)
+    res.redirect(`/stories/${req.params.storyId}`);
   });
 
   return router;
