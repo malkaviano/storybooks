@@ -43,12 +43,18 @@ function register() {
           function (err, profile) {
             if(err) {
               utils.error(res, err, 'Error logging in');
-
-              return;
             } else {
-              User.findOne({ googleId: profile.id })
-                  .then(user => {
-                    if(!user) {
+              utils.resolvePromise(
+                User.findOne({ googleId: profile.id }),
+                user => {
+                  if(user) {
+                    req.session.userId = user._id;
+                    req.session.username = user.name;
+                    req.session.email = user.email;
+                    
+                    res.redirect(req.session.requestedUrl || defaults.loginRedirect);
+                  } else {
+                    utils.resolvePromise(
                       new User(
                         {
                           googleId: profile.id,
@@ -56,24 +62,20 @@ function register() {
                           email: profile.emails[0].value,
                           image: profile.image.url
                         }
-                      ).save()
-                      .then(newUser => {
+                      ).save(),
+                      newUser => {
                         user = newUser;
-                      })
-                      .catch(err => {
+                      },
+                      err => {
                         utils.error(res, err, 'DB Error');
-                      });
-                    } else {
-                      req.session.userId = user._id;
-                      req.session.username = user.name;
-                      req.session.email = user.email;
-                      
-                      res.redirect(req.session.requestedUrl || defaults.loginRedirect);
-                    }                
-                  })
-                  .catch(err => {
-                    utils.error(res, err, 'DB Error');
-                  });
+                      }
+                    );
+                  }                
+                },
+                err => {
+                  utils.error(res, err, 'DB Error');
+                }
+              );
             }
         });
       }
