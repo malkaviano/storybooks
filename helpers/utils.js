@@ -22,7 +22,7 @@ function fillObject(obj, values) {
 
 module.exports = {
   ensureAuthenticated: function(req, res, next) {
-    console.log(req.session.username);
+    console.log(`User: ${req.session.username}`);
     if (req.session.username) {
       return next();
     }
@@ -38,7 +38,6 @@ module.exports = {
   },
   fillObject: fillObject,
   setUserSession: (session, user) => {
-    console.log('Setting user session');
     session.userId = user.id;
     session.username = user.name;
     session.email = user.email;

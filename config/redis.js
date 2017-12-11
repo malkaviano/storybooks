@@ -8,10 +8,4 @@ const redis = new Redis({
   db: 0  
 });
 
-redis.set('my test key', 'my test value');
-redis.get('my test key', function(error, result) {
-  if (error) throw error;
-  console.log('GET result ->', result)
-});
-
 module.exports = redis;
