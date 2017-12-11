@@ -8,6 +8,10 @@ const redis = new Redis({
   db: 0  
 });
 
-console.log(`Redis status: ${redis.status}`);
+client.set('my test key', 'my test value', redis.print);
+client.get('my test key', function(error, result) {
+  if (error) throw error;
+  console.log('GET result ->', result)
+});
 
 module.exports = redis;
