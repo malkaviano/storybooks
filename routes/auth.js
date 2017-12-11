@@ -50,6 +50,8 @@ function register() {
                   if(user) {
                     utils.setUserSession(req.session, user);
 
+                    console.log(`User: ${req.session.username}`);
+                    
                     res.redirect(req.session.requestedUrl || defaults.loginRedirect);
                   } else {
                     utils.resolvePromise(
@@ -65,7 +67,7 @@ function register() {
                         utils.setUserSession(req.session, newUser);
                         
                         console.log(`User: ${req.session.username}`);
-                        
+
                         res.redirect(req.session.requestedUrl || defaults.loginRedirect);
                       },
                       err => {
