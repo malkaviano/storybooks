@@ -24,7 +24,7 @@ app.use(function(req, res, next) {
       next();
 });
 
-app.use(flash());
+app.use(flash);
 
 app.use(methodOverride('_method'));
 
