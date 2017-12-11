@@ -37,6 +37,7 @@ module.exports = {
   },
   fillObject: fillObject,
   setUserSession: (session, user) => {
+    console.log('Setting user session');
     session.userId = user.id;
     session.username = user.name;
     session.email = user.email;
