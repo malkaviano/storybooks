@@ -64,6 +64,8 @@ function register() {
                       newUser => {
                         utils.setUserSession(req.session, newUser);
                         
+                        console.log(`User: ${req.session.username}`);
+                        
                         res.redirect(req.session.requestedUrl || defaults.loginRedirect);
                       },
                       err => {
