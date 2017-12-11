@@ -22,7 +22,6 @@ function fillObject(obj, values) {
 
 module.exports = {
   ensureAuthenticated: function(req, res, next) {
-    console.log(`User: ${req.session.username}`);
     if (req.session.username) {
       return next();
     }
