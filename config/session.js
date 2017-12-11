@@ -20,7 +20,6 @@ module.exports = function() {
       secret: process.env.SESSION,
       resave: defaults.sessionResave,
       saveUninitialized: defaults.sessionSaveUninitialized,
-      cookie: { secure: defaults.cookieSecure },
       store: store
     }
   );
