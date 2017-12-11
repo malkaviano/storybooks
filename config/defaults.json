@@ -12,6 +12,6 @@
   "plusVersion": "v1",
   "plusUserId": "me",
   "sessionResave": false,
-  "sessionSaveUninitialized": true,
+  "sessionSaveUninitialized": false,
   "cookieSecure": true
 }
