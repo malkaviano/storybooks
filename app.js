@@ -6,10 +6,13 @@ const express = require('express'),
       parser = require('body-parser'),
       methodOverride = require('method-override'),
       session = require('./config/session'),
-      flash = require('./config/flash'),      
+      flash = require('express-flash-2'),      
       viewEngine = require('./config/handlebars'),
       routes = require('./config/routes'),
+      helmet = require('helmet'),
       port = process.env.PORT || 3000;
+
+app.use(helmet());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -24,7 +27,7 @@ app.use(function(req, res, next) {
       next();
 });
 
-app.use(flash);
+app.use(flash());
 
 app.use(methodOverride('_method'));
 
