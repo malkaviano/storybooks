@@ -7,7 +7,7 @@ const defaults = require('./defaults.json'),
       //store = new MongoStore({ mongooseConnection: connection })
       RedisStore = require('connect-redis')(session),
       redisClient = require('./redis'),
-      store = new RedisStore(redisClient)
+      store = new RedisStore({ client: redisClient })
 ;
 
 store.clear(result => console.log(result));
