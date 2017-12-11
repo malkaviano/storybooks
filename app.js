@@ -16,7 +16,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(parser.urlencoded({ extended: false }));
 app.use(parser.json());
 
-app.use(session());
+app.use(session);
 
 app.use(function(req, res, next) {
       res.locals.session = req.session;
