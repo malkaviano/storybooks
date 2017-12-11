@@ -51,6 +51,7 @@ function register() {
                     utils.setUserSession(req.session, user);
 
                     console.log(`User: ${req.session.username}`);
+                    console.log(`Url: ${req.session.requestedUrl}`);
                     
                     res.redirect(req.session.requestedUrl || defaults.loginRedirect);
                   } else {
