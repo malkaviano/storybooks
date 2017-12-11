@@ -1,7 +1,7 @@
 'use strict';
 
 const defaults = require('./defaults.json'),
-      connection = require('./mongodb').connection,
+      connection = require('./mongodb').connection
 ;
 
 //store.clear(result => console.log(result));
@@ -14,7 +14,7 @@ module.exports = function() {
         redisClient = require('./redis'),
         store = new RedisStore({ client: redisClient })
   ;
-  
+
   return session(
     {
       secret: process.env.SESSION,
