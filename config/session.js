@@ -10,7 +10,7 @@ const defaults = require('./defaults.json'),
       store = new RedisStore({ client: redisClient })
 ;
 
-store.clear(result => console.log(result));
+//store.clear(result => console.log(result));
 
 module.exports = function() {
 
