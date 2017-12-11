@@ -8,6 +8,6 @@ const redis = new Redis({
   db: 0  
 });
 
-console.log(redis.status);
+console.log(`Redis status: ${redis.status}`);
 
 module.exports = redis;
